@@ -1,0 +1,71 @@
+#include "Headers/db.h"
+
+db::~db()
+{
+	std::for_each(begin(m_Students), end(m_Students), [](Student* pStudent) {
+		delete pStudent;
+		});
+}
+
+bool db::addStudent(Student* studentInput)
+{
+
+	if (alreadyExist(studentInput->m_pesel) || studentInput->m_pesel.getPesel() == "")
+		return false;
+
+	m_Students.push_back(studentInput);
+	return true;
+}
+
+bool db::Search(std::string surname)
+{	
+	auto result = std::find_if(begin(m_Students), end(m_Students), [surname](Student* student) {return student->m_surname == surname; });
+	if (result != m_Students.end())
+		return true;
+
+	return false;
+}
+
+bool db::Search(pesel pesel)
+{
+	return alreadyExist(pesel);
+}
+
+void db::SortByPesel()
+{
+	std::sort(begin(m_Students), end(m_Students), [](Student* first, Student* second) {return first->m_pesel.getPesel() < second->m_pesel.getPesel(); });
+}
+
+void db::SortBySurname()
+{
+	std::sort(begin(m_Students), end(m_Students), [](Student* first, Student* second) {return first->m_surname < second->m_surname; });
+}
+
+bool db::removeStudent(unsigned int indexNr)
+{
+	auto result = std::find_if(begin(m_Students), end(m_Students), [indexNr](Student* student) {return student->m_indeks_number == indexNr; });
+	if (result != m_Students.end())
+	{
+		m_Students.erase(result);
+		return true;
+	}
+
+	return false;
+}
+
+std::string db::getStudentsSurnames()
+{
+	std::string output;
+	for (auto student : m_Students)
+		output.append(student->m_surname + ';');
+
+	return output;
+}
+
+bool db::alreadyExist(pesel pesel)
+{
+	if (pesel.getPesel() != "")
+		if (std::any_of(begin(m_Students), end(m_Students), [pesel](Student* student) {return student->m_pesel.getPesel() == pesel.getPesel(); }))
+			return true;
+	return false;
+}

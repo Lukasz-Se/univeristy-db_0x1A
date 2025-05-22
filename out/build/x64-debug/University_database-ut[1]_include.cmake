@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/Pastor/source/repos/university_db-minproject/out/build/x64-debug/University_database-ut[1]_tests.cmake")
+  include("C:/Users/Pastor/source/repos/university_db-minproject/out/build/x64-debug/University_database-ut[1]_tests.cmake")
+else()
+  add_test(University_database-ut_NOT_BUILT University_database-ut_NOT_BUILT)
+endif()
