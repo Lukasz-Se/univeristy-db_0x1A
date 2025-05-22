@@ -72,6 +72,8 @@ void db::Clear()
 	std::for_each(begin(m_Students), end(m_Students), [](Student* pStudent) {
 		delete pStudent;
 		});
+
+	m_Students.clear();
 }
 
 bool db::saveToFile(std::string file)

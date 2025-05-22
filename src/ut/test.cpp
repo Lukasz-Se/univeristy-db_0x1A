@@ -16,7 +16,7 @@ protected:
 	Student* student_3 = new Student;
 	Student* student_4 = new Student;
 
-	pesel pesel1, pesel2, fake;
+	pesel pesel1, pesel2, pesel3, fake;
 
 	db university_db;
 };
@@ -269,7 +269,7 @@ TEST_F(univeristyDBFixture, SortBySurname)
 	EXPECT_EQ("Brunner;Dolas;Kloss;", university_db.getStudentsSurnames());
 }
 
-TEST_F(univeristyDBFixture, SavingToFile)
+TEST_F(univeristyDBFixture, ClearDB)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -296,5 +296,16 @@ TEST_F(univeristyDBFixture, SavingToFile)
 	university_db.addStudent(student_1);
 	university_db.addStudent(student_3);
 
-	EXPECT_TRUE(university_db.saveToFile());
+	pesel1 = student_1->m_pesel;
+	pesel2 = student_2->m_pesel;
+	pesel3 = student_3->m_pesel;
+
+	university_db.Clear();
+	
+	EXPECT_FALSE(university_db.Search(pesel1));
+	EXPECT_FALSE(university_db.Search(pesel2));
+	EXPECT_FALSE(university_db.Search(pesel3));
+
+	fake.set("791204054565");
+	EXPECT_FALSE(university_db.Search(fake));
 }
