@@ -41,9 +41,15 @@ void db::SortBySurname()
 
 bool db::removeStudent(unsigned int indexNr)
 {
-	auto result = std::find_if(begin(m_Students), end(m_Students), [indexNr](Student* student) {return student->m_indeks_number == indexNr; });
+	Student* p_tempStudentPtr = nullptr;
+	auto result = std::find_if(begin(m_Students), end(m_Students), [indexNr, p_tempStudentPtr](Student* student) mutable{
+		p_tempStudentPtr = student;
+		return student->m_indeks_number == indexNr; }
+	);
+
 	if (result != m_Students.end())
 	{
+		delete p_tempStudentPtr;
 		m_Students.erase(result);
 		return true;
 	}
