@@ -26,3 +26,17 @@
 48	756	7696161012930613	CMakeFiles/University_database-ut.dir/src/peselBirthDateParser.cpp.obj	5d8bc3edb3a64b15
 40	793	7696161012860552	CMakeFiles/University_database-ut.dir/src/db.cpp.obj	d44a9662e62bf3b3
 24	631	7696161169432396	C:/Users/Pastor/source/repos/university_db-minproject/out/build/x64-debug/University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
+24	992	7696196718414260	CMakeFiles/University_database.dir/src/db.cpp.obj	f571770073e9d321
+43	1046	7696196718594425	CMakeFiles/University_database-ut.dir/src/db.cpp.obj	d44a9662e62bf3b3
+993	1202	7696196728093074	University_database.exe	6ad5b2acc98e42a1
+33	1593	7696196718494334	CMakeFiles/University_database-ut.dir/src/ut/test.cpp.obj	b9ca7ee78074ee2e
+1593	1945	7696196737536735	University_database-ut.exe	e7b4980a9da6f12b
+1593	1945	7696196737536735	University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
+1593	1945	7696196737536735	C:/Users/Pastor/source/repos/university_db-minproject/out/build/x64-debug/University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
+25	753	7696199274294464	CMakeFiles/University_database.dir/src/db.cpp.obj	f571770073e9d321
+43	824	7696199274474636	CMakeFiles/University_database-ut.dir/src/db.cpp.obj	d44a9662e62bf3b3
+754	968	7696199281581101	University_database.exe	6ad5b2acc98e42a1
+33	1371	7696199274384543	CMakeFiles/University_database-ut.dir/src/ut/test.cpp.obj	b9ca7ee78074ee2e
+1372	2459	7696199298561611	University_database-ut.exe	e7b4980a9da6f12b
+1372	2459	7696199298561611	University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
+1372	2459	7696199298561611	C:/Users/Pastor/source/repos/university_db-minproject/out/build/x64-debug/University_database-ut[1]_tests.cmake	e7b4980a9da6f12b

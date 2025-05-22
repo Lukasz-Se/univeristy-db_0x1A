@@ -16,9 +16,14 @@ public:
 	bool removeStudent(unsigned int indexNr);
 	
 	std::string getStudentsSurnames();
+	
+	void Clear();
+	bool saveToFile(std::string file = "db.dat");
+	bool readFromFile(std::string file = "db.dat");
 
 private:
 	std::vector<Student*> m_Students;
 
 	bool alreadyExist(pesel pesel);
+
 };

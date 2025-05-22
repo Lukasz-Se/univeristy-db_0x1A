@@ -2,9 +2,7 @@
 
 db::~db()
 {
-	std::for_each(begin(m_Students), end(m_Students), [](Student* pStudent) {
-		delete pStudent;
-		});
+	Clear();
 }
 
 bool db::addStudent(Student* studentInput)
@@ -67,5 +65,21 @@ bool db::alreadyExist(pesel pesel)
 	if (pesel.getPesel() != "")
 		if (std::any_of(begin(m_Students), end(m_Students), [pesel](Student* student) {return student->m_pesel.getPesel() == pesel.getPesel(); }))
 			return true;
+	return false;
+}
+void db::Clear()
+{
+	std::for_each(begin(m_Students), end(m_Students), [](Student* pStudent) {
+		delete pStudent;
+		});
+}
+
+bool db::saveToFile(std::string file)
+{
+	return false;
+}
+
+bool db::readFromFile(std::string file)
+{
 	return false;
 }
