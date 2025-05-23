@@ -315,46 +315,6 @@ TEST_F(univeristyDBFixture, ClearDB)
 }
 
 TEST_F(univeristyDBFixture, LoadFromFile)
-{
-	student_1->m_name = "Franek";
-	student_1->m_surname = "Dolas";
-	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
-	student_1->m_indeks_number = 1001;
-	student_1->m_gender = gender::male;
-	student_1->m_pesel.set("55101212346");
-
-	student_2->m_name = "Hans";
-	student_2->m_surname = "Kloss";
-	student_2->m_address = "Stetinstrasse 77 Berlin";
-	student_2->m_indeks_number = 1002;
-	student_2->m_gender = gender::male;
-	student_2->m_pesel.set("23101212345");
-
-	student_3->m_name = "Hermann";
-	student_3->m_surname = "Brunner";
-	student_3->m_address = "Warszawsk 15 Olsztyn";
-	student_3->m_indeks_number = 1003;
-	student_3->m_gender = gender::male;
-	student_3->m_pesel.set("79120405455");
-
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
-
-	pesel1 = student_1->m_pesel;
-	pesel2 = student_2->m_pesel;
-	pesel3 = student_3->m_pesel;
-
-	EXPECT_TRUE(university_db.Search(pesel1));
-	EXPECT_TRUE(university_db.Search(pesel2));
-	EXPECT_TRUE(university_db.Search(pesel3));
-
-	university_db.Clear();
-
-	EXPECT_FALSE(university_db.Search(pesel1));
-	EXPECT_FALSE(university_db.Search(pesel2));
-	EXPECT_FALSE(university_db.Search(pesel3));
-
-	fake.set("791204054565");
-	EXPECT_FALSE(university_db.Search(fake));
+{	
+	EXPECT_TRUE(university_db.readFromFile());
 }
