@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <vector>
+
 #include "Student.h"
 
 class db

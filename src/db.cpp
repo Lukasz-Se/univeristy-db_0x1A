@@ -84,6 +84,23 @@ void db::Clear()
 
 bool db::saveToFile(std::string file)
 {
+	std::ofstream fd(file, std::ios::out | std::ios::binary);
+	if (fd)
+	{
+		for (auto student : m_Students)
+		{
+			fd.write((char*)&student->m_name, sizeof(student->m_name));
+			fd.write((char*)&student->m_surname, sizeof(student->m_surname));
+			fd.write((char*)&student->m_address, sizeof(student->m_address));
+			fd.write((char*)&student->m_pesel.getPesel(), sizeof(student->m_pesel.getPesel()));
+			fd.write((char*)&student->m_gender, sizeof(student->m_gender));
+			fd.write((char*)&student->m_indeks_number, sizeof(student->m_indeks_number));
+		}
+		fd.close();
+
+		return true;
+	}
+
 	return false;
 }
 

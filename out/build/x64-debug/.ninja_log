@@ -69,3 +69,11 @@
 1353	1994	7696904639926585	University_database-ut.exe	e7b4980a9da6f12b
 1353	1994	7696904639926585	University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
 1353	1994	7696904639926585	C:/Users/Pastor/source/repos/university_db-minproject/out/build/x64-debug/University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
+34	964	7696948821514843	CMakeFiles/University_database.dir/src/main.cpp.obj	2f70e5586cacf7e9
+25	1044	7696948821424758	CMakeFiles/University_database.dir/src/db.cpp.obj	f571770073e9d321
+55	1148	7696948821725033	CMakeFiles/University_database-ut.dir/src/db.cpp.obj	d44a9662e62bf3b3
+1044	1440	7696948831619107	University_database.exe	6ad5b2acc98e42a1
+46	1716	7696948821634951	CMakeFiles/University_database-ut.dir/src/ut/test.cpp.obj	b9ca7ee78074ee2e
+1716	2599	7696948847103201	University_database-ut.exe	e7b4980a9da6f12b
+1716	2599	7696948847103201	University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
+1716	2599	7696948847103201	C:/Users/Pastor/source/repos/university_db-minproject/out/build/x64-debug/University_database-ut[1]_tests.cmake	e7b4980a9da6f12b
