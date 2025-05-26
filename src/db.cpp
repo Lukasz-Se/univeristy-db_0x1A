@@ -84,27 +84,46 @@ void db::Clear()
 
 bool db::saveToFile(std::string file)
 {
-	std::ofstream fd(file, std::ios::out | std::ios::binary);
+	std::ofstream fd(file, std::ios::out | std::ios::trunc);
 	if (fd)
 	{
 		for (auto student : m_Students)
 		{
-			fd.write((char*)&student->m_name, sizeof(student->m_name));
-			fd.write((char*)&student->m_surname, sizeof(student->m_surname));
-			fd.write((char*)&student->m_address, sizeof(student->m_address));
-			fd.write((char*)&student->m_pesel.getPesel(), sizeof(student->m_pesel.getPesel()));
-			fd.write((char*)&student->m_gender, sizeof(student->m_gender));
-			fd.write((char*)&student->m_indeks_number, sizeof(student->m_indeks_number));
+		
+			fd << student->m_name << "\n";
+			fd << student->m_surname << "\n";
+			fd << student->m_address << "\n";
+			fd << student->m_pesel.getPesel() << "\n";
+			fd << student->m_indeks_number << "\n";
 		}
-		fd.close();
-
 		return true;
 	}
-
 	return false;
 }
 
 bool db::readFromFile(std::string file)
 {
+	std::ifstream fd(file, std::ios::in);
+	Student* pTempStudent = new Student;
+	std::string mPesel;
+	std::string mIndeksNumber;
+	
+	std::array<std::string*, 5> fileds = { &pTempStudent->m_name, &pTempStudent->m_surname, &pTempStudent->m_address, &mPesel, &mIndeksNumber };
+
+	if (fd.is_open())
+	{
+		std::string buffor;
+		Student* pTempStudent = new Student;
+
+		int value = 0;
+		while (!std::getline(fd, buffor, '\n').eof())
+		{
+			*fileds.at(value) = buffor;
+			value++;
+			if (value > 4)
+				value = 0;
+		}
+		return true;
+	}
 	return false;
 }
