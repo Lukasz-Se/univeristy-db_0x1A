@@ -12,14 +12,14 @@ class db
 public:
 	~db();
 	bool addStudent(Student* studentInput);
-	bool Search(std::string surname);
-	bool Search(pesel pesel);
+	bool Search(const std::string& surname) const;
+	bool Search(const pesel& pesel) const;
 	void SortByPesel();
 	void SortBySurname();
 
 	bool removeStudent(unsigned int indexNr);
 	
-	std::string getStudentsSurnames();
+	std::string getStudentsSurnames() const;
 	
 	void Clear();
 	bool saveToFile(std::string file = "db.dat");
@@ -28,6 +28,6 @@ public:
 private:
 	std::vector<Student*> m_Students;
 
-	bool alreadyExist(pesel pesel);
+	bool alreadyExist(const pesel pesel) const;
 
 };

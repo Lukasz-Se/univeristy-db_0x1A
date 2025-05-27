@@ -15,7 +15,7 @@ bool db::addStudent(Student* studentInput)
 	return true;
 }
 
-bool db::Search(std::string surname)
+bool db::Search(const std::string& surname) const
 {	
 	auto result = std::find_if(begin(m_Students), end(m_Students), [surname](Student* student) {return student->m_surname == surname; });
 	if (result != m_Students.end())
@@ -24,7 +24,7 @@ bool db::Search(std::string surname)
 	return false;
 }
 
-bool db::Search(pesel pesel)
+bool db::Search(const pesel& pesel) const
 {
 	return alreadyExist(pesel);
 }
@@ -57,7 +57,7 @@ bool db::removeStudent(unsigned int indexNr)
 	return false;
 }
 
-std::string db::getStudentsSurnames()
+std::string db::getStudentsSurnames() const
 {
 	std::string output;
 	for (auto student : m_Students)
@@ -66,7 +66,7 @@ std::string db::getStudentsSurnames()
 	return output;
 }
 
-bool db::alreadyExist(pesel pesel)
+bool db::alreadyExist(const pesel pesel) const 
 {
 	if (pesel.getPesel() != "")
 		if (std::any_of(begin(m_Students), end(m_Students), [pesel](Student* student) {return student->m_pesel.getPesel() == pesel.getPesel(); }))
