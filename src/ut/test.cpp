@@ -341,6 +341,8 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 	university_db.addStudent(student_1);
 	university_db.addStudent(student_3);
 
+	std::string before = university_db.getStudentsSurnames();
+
 	university_db.saveToFile();
 
 	university_db.Clear();
@@ -349,6 +351,10 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 	EXPECT_TRUE(true, university_db.Search("Brunner"));
 	EXPECT_TRUE(true, university_db.Search("Kloss"));
 	EXPECT_TRUE(true, university_db.Search("Dolas"));
+
+	std::string after = university_db.getStudentsSurnames();
+
+	EXPECT_EQ(before, after);
 }
 
 TEST_F(univeristyDBFixture, SaveTOFile)
