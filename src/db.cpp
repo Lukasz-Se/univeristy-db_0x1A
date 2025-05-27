@@ -104,12 +104,7 @@ bool db::saveToFile(std::string file)
 bool db::readFromFile(std::string file)
 {
 	std::ifstream fd(file, std::ios::in);
-	Student* pTempStudent = new Student;
-	std::string mPesel;
-	std::string mIndeksNumber;
 	
-	std::array<std::string*, 5> fileds = { &pTempStudent->m_name, &pTempStudent->m_surname, &pTempStudent->m_address, &mPesel, &mIndeksNumber };
-
 	if (fd.is_open())
 	{
 		std::string buffor;
@@ -118,10 +113,25 @@ bool db::readFromFile(std::string file)
 		int value = 0;
 		while (!std::getline(fd, buffor, '\n').eof())
 		{
-			*fileds.at(value) = buffor;
+			if (value == 0)
+				pTempStudent->m_name = buffor;
+			else if (value == 1)
+				pTempStudent->m_surname = buffor;
+			else if (value == 2)
+				pTempStudent->m_address = buffor;
+			else if (value == 3)
+				pTempStudent->m_pesel.set(buffor);
+			else if (value == 4)
+				pTempStudent->m_indeks_number = stoi(buffor);
+
 			value++;
+
 			if (value > 4)
+			{
 				value = 0;
+				addStudent(pTempStudent);
+				pTempStudent = new Student;
+			}
 		}
 		return true;
 	}

@@ -343,6 +343,8 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 
 	university_db.saveToFile();
 
+	university_db.Clear();
+
 	EXPECT_TRUE(university_db.readFromFile());
 	EXPECT_TRUE(true, university_db.Search("Brunner"));
 	EXPECT_TRUE(true, university_db.Search("Kloss"));
