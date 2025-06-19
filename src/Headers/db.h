@@ -4,8 +4,10 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <algorithm>
 
 #include "Student.h"
+#include "Employee.h"
 
 class db
 {
@@ -20,13 +22,14 @@ public:
 	bool removeStudent(unsigned int indexNr);
 	
 	std::string getStudentsSurnames() const;
+	std::string getDB();
 	
 	void Clear();
 	bool saveToFile(std::string file = "db.dat");
 	bool readFromFile(std::string file = "db.dat");
 
 private:
-	std::vector<Student*> m_Students;
+	std::vector<Student*> m_Persons;
 
 	bool alreadyExist(const pesel pesel) const;
 

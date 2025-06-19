@@ -43,7 +43,7 @@ int main()
 
 	university_db.addStudent(student_1);
 	university_db.addStudent(student_2);
-	university_db.addStudent(student_3);
+	//university_db.addStudent(student_3);
 	//university_db.addStudent(student_4);
 
 	university_db.saveToFile();
@@ -56,4 +56,14 @@ int main()
 	university_db.readFromFile();
 
 	std::cout << "Lista studentow:" << university_db.getStudentsSurnames() << std::endl;
+
+	std::cout << std::endl << university_db.getDB() << std::endl;
+
+	std::string expected = "Franek;Dolas;\nHans;Kloss;\n";
+	std::cout << std::endl << expected << std::endl;
+
+	if (expected == university_db.getDB())
+		std::cout << "OK" << std::endl;
+	else
+		std::cout << "None OK" << std::endl;
 }

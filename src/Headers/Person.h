@@ -7,7 +7,6 @@ enum class gender
     female
 };
 
-
 class Person
 {
 public:

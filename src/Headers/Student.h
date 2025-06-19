@@ -1,10 +1,10 @@
 #pragma once
-#include <iostream>
 #include "Person.h"
 
 
-struct Student : public Person
+class Student : public Person
 {   
+public:
     unsigned short int m_indeks_number;
 };
 
