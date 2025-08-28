@@ -15,6 +15,12 @@ bool db::addStudent(Student* studentInput)
 	return true;
 }
 
+bool db::addEmployee(Employee* employeeInput)
+{
+
+	return true;
+}
+
 bool db::Search(const std::string& surname) const
 {	
 	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Student* student) {return student->m_surname == surname; });

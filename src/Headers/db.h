@@ -14,6 +14,7 @@ class db
 public:
 	~db();
 	bool addStudent(Student* studentInput);
+	bool addEmployee(Employee* employeeInput);
 	bool Search(const std::string& surname) const;
 	bool Search(const pesel& pesel) const;
 	void SortByPesel();
@@ -29,7 +30,7 @@ public:
 	bool readFromFile(std::string file = "db.dat");
 
 private:
-	std::vector<Student*> m_Persons;
+	std::vector<Person*> m_Persons;
 
 	bool alreadyExist(const pesel pesel) const;
 
