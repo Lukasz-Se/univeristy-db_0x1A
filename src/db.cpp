@@ -17,13 +17,16 @@ bool db::addStudent(Student* studentInput)
 
 bool db::addEmployee(Employee* employeeInput)
 {
+	if (alreadyExist(employeeInput->m_pesel) || employeeInput->m_pesel.getPesel() == "" || employeeInput->m_salary == 0)
+		return false;
 
+	m_Persons.push_back(employeeInput);
 	return true;
 }
 
 bool db::Search(const std::string& surname) const
 {	
-	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Student* student) {return student->m_surname == surname; });
+	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Person* student) {return student->m_surname == surname; });
 	if (result != m_Persons.end())
 		return true;
 
@@ -37,22 +40,22 @@ bool db::Search(const pesel& pesel) const
 
 void db::SortByPesel()
 {
-	std::sort(begin(m_Persons), end(m_Persons), [](Student* first, Student* second) {return first->m_pesel.getPesel() < second->m_pesel.getPesel(); });
+	std::sort(begin(m_Persons), end(m_Persons), [](Person* first, Person* second) {return first->m_pesel.getPesel() < second->m_pesel.getPesel(); });
 }
 
 void db::SortBySurname()
 {
-	std::sort(begin(m_Persons), end(m_Persons), [](Student* first, Student* second) {return first->m_surname < second->m_surname; });
+	std::sort(begin(m_Persons), end(m_Persons), [](Person* first, Person* second) {return first->m_surname < second->m_surname; });
 }
 
 bool db::removeStudent(unsigned int indexNr)
 {
 	Student* p_tempStudentPtr = nullptr;
-	auto result = std::find_if(begin(m_Persons), end(m_Persons), [indexNr, p_tempStudentPtr](Student* student) mutable{
-		p_tempStudentPtr = student;
-		return student->m_indeks_number == indexNr; }
+	auto result = std::find_if(begin(m_Persons), end(m_Persons), [indexNr, p_tempStudentPtr](Person* student) mutable{
+		p_tempStudentPtr = dynamic_cast<Student*>(student);
+		return p_tempStudentPtr->m_indeks_number == indexNr; }
 	);
-
+	
 	if (result != m_Persons.end())
 	{
 		delete p_tempStudentPtr;
@@ -87,14 +90,14 @@ std::string db::getDB()
 bool db::alreadyExist(const pesel pesel) const 
 {
 	if (pesel.getPesel() != "")
-		if (std::any_of(begin(m_Persons), end(m_Persons), [pesel](Student* student) {return student->m_pesel.getPesel() == pesel.getPesel(); }))
+		if (std::any_of(begin(m_Persons), end(m_Persons), [pesel](Person* pPerson) {return pPerson->m_pesel.getPesel() == pesel.getPesel(); }))
 			return true;
 	return false;
 }
 void db::Clear()
 {
-	std::for_each(begin(m_Persons), end(m_Persons), [](Student* pStudent) {
-		delete pStudent;
+	std::for_each(begin(m_Persons), end(m_Persons), [](Person* pPerson) {
+		delete pPerson;
 		});
 
 	m_Persons.clear();
@@ -112,7 +115,7 @@ bool db::saveToFile(std::string file)
 			fd << pearson->m_surname << "\n";
 			fd << pearson->m_address << "\n";
 			fd << pearson->m_pesel.getPesel() << "\n";
-			if (dynamic_cast<Student*>(pearson))
+			//if (dynamic_cast<Student*>(pearson))
 		}
 		return true;
 	}

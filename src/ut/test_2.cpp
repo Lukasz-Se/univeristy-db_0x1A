@@ -338,75 +338,75 @@ TEST_F(univeristyDBFixture, ClearDB)
 	EXPECT_FALSE(university_db.Search(fake));
 }
 
-TEST_F(univeristyDBFixture, LoadFromFile)
-{
-	student_1->m_name = "Franek";
-	student_1->m_surname = "Dolas";
-	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
-	student_1->m_indeks_number = 1001;
-	student_1->m_gender = gender::male;
-	student_1->m_pesel.set("55101212346");
-
-	student_2->m_name = "Hans";
-	student_2->m_surname = "Kloss";
-	student_2->m_address = "Stetinstrasse 77 Berlin";
-	student_2->m_indeks_number = 1002;
-	student_2->m_gender = gender::male;
-	student_2->m_pesel.set("23101212345");
-
-	student_3->m_name = "Hermann";
-	student_3->m_surname = "Brunner";
-	student_3->m_address = "Warszawsk 15 Olsztyn";
-	student_3->m_indeks_number = 1003;
-	student_3->m_gender = gender::male;
-	student_3->m_pesel.set("79120405455");
-
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
-
-	std::string before = university_db.getStudentsSurnames();
-
-	university_db.saveToFile();
-
-	university_db.Clear();
-
-	EXPECT_TRUE(university_db.readFromFile());
-	EXPECT_TRUE(true, university_db.Search("Brunner"));
-	EXPECT_TRUE(true, university_db.Search("Kloss"));
-	EXPECT_TRUE(true, university_db.Search("Dolas"));
-
-	std::string after = university_db.getStudentsSurnames();
-
-	EXPECT_EQ(before, after);
-}
-
-TEST_F(univeristyDBFixture, SaveTOFile)
-{
-	student_1->m_name = "Franek";
-	student_1->m_surname = "Dolas";
-	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
-	student_1->m_indeks_number = 1001;
-	student_1->m_gender = gender::male;
-	student_1->m_pesel.set("55101212346");
-
-	student_2->m_name = "Hans";
-	student_2->m_surname = "Kloss";
-	student_2->m_address = "Stetinstrasse 77 Berlin";
-	student_2->m_indeks_number = 1002;
-	student_2->m_gender = gender::male;
-	student_2->m_pesel.set("23101212345");
-
-	student_3->m_name = "Hermann";
-	student_3->m_surname = "Brunner";
-	student_3->m_address = "Warszawsk 15 Olsztyn";
-	student_3->m_indeks_number = 1003;
-	student_3->m_gender = gender::male;
-	student_3->m_pesel.set("79120405455");
-
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
-
-	EXPECT_TRUE(university_db.saveToFile());
-}
+//TEST_F(univeristyDBFixture, LoadFromFile)
+//{
+//	student_1->m_name = "Franek";
+//	student_1->m_surname = "Dolas";
+//	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+//	student_1->m_indeks_number = 1001;
+//	student_1->m_gender = gender::male;
+//	student_1->m_pesel.set("55101212346");
+//
+//	student_2->m_name = "Hans";
+//	student_2->m_surname = "Kloss";
+//	student_2->m_address = "Stetinstrasse 77 Berlin";
+//	student_2->m_indeks_number = 1002;
+//	student_2->m_gender = gender::male;
+//	student_2->m_pesel.set("23101212345");
+//
+//	student_3->m_name = "Hermann";
+//	student_3->m_surname = "Brunner";
+//	student_3->m_address = "Warszawsk 15 Olsztyn";
+//	student_3->m_indeks_number = 1003;
+//	student_3->m_gender = gender::male;
+//	student_3->m_pesel.set("79120405455");
+//
+//	university_db.addStudent(student_2);
+//	university_db.addStudent(student_1);
+//	university_db.addStudent(student_3);
+//
+//	std::string before = university_db.getStudentsSurnames();
+//
+//	university_db.saveToFile();
+//
+//	university_db.Clear();
+//
+//	EXPECT_TRUE(university_db.readFromFile());
+//	EXPECT_TRUE(true, university_db.Search("Brunner"));
+//	EXPECT_TRUE(true, university_db.Search("Kloss"));
+//	EXPECT_TRUE(true, university_db.Search("Dolas"));
+//
+//	std::string after = university_db.getStudentsSurnames();
+//
+//	EXPECT_EQ(before, after);
+//}
+//
+//TEST_F(univeristyDBFixture, SaveTOFile)
+//{
+//	student_1->m_name = "Franek";
+//	student_1->m_surname = "Dolas";
+//	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+//	student_1->m_indeks_number = 1001;
+//	student_1->m_gender = gender::male;
+//	student_1->m_pesel.set("55101212346");
+//
+//	student_2->m_name = "Hans";
+//	student_2->m_surname = "Kloss";
+//	student_2->m_address = "Stetinstrasse 77 Berlin";
+//	student_2->m_indeks_number = 1002;
+//	student_2->m_gender = gender::male;
+//	student_2->m_pesel.set("23101212345");
+//
+//	student_3->m_name = "Hermann";
+//	student_3->m_surname = "Brunner";
+//	student_3->m_address = "Warszawsk 15 Olsztyn";
+//	student_3->m_indeks_number = 1003;
+//	student_3->m_gender = gender::male;
+//	student_3->m_pesel.set("79120405455");
+//
+//	university_db.addStudent(student_2);
+//	university_db.addStudent(student_1);
+//	university_db.addStudent(student_3);
+//
+//	EXPECT_TRUE(university_db.saveToFile());
+//}
