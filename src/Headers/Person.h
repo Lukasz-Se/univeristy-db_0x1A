@@ -10,9 +10,12 @@ enum class gender
 class Person
 {
 public:
+    Person(std::string name, std::string surname, std::string address, pesel pesel, gender gender);
     std::string m_name;
     std::string m_surname;
     std::string m_address;
     pesel m_pesel;
     gender m_gender;
+
+    virtual std::string getData() = 0;
 };

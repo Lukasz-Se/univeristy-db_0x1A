@@ -49,6 +49,13 @@ cmake_ninja_workdir = C$:\Users\Pastor\source\repos\university_db-minproject\out
 
 build cmake_object_order_depends_target_University_database: phony || .
 
+build CMakeFiles\University_database.dir\src\Person.cpp.obj: CXX_COMPILER__University_database_unscanned_Debug C$:\Users\Pastor\source\repos\university_db-minproject\src\Person.cpp || cmake_object_order_depends_target_University_database
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -ZI
+  OBJECT_DIR = CMakeFiles\University_database.dir
+  OBJECT_FILE_DIR = CMakeFiles\University_database.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\University_database.dir\
+  TARGET_PDB = University_database.pdb
+
 build CMakeFiles\University_database.dir\src\Student.cpp.obj: CXX_COMPILER__University_database_unscanned_Debug C$:\Users\Pastor\source\repos\university_db-minproject\src\Student.cpp || cmake_object_order_depends_target_University_database
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -ZI
   OBJECT_DIR = CMakeFiles\University_database.dir
@@ -92,7 +99,7 @@ build CMakeFiles\University_database.dir\src\main.cpp.obj: CXX_COMPILER__Univers
 #############################################
 # Link the executable University_database.exe
 
-build University_database.exe: CXX_EXECUTABLE_LINKER__University_database_Debug CMakeFiles\University_database.dir\src\Student.cpp.obj CMakeFiles\University_database.dir\src\pesel.cpp.obj CMakeFiles\University_database.dir\src\db.cpp.obj CMakeFiles\University_database.dir\src\peselBirthDateParser.cpp.obj CMakeFiles\University_database.dir\src\main.cpp.obj
+build University_database.exe: CXX_EXECUTABLE_LINKER__University_database_Debug CMakeFiles\University_database.dir\src\Person.cpp.obj CMakeFiles\University_database.dir\src\Student.cpp.obj CMakeFiles\University_database.dir\src\pesel.cpp.obj CMakeFiles\University_database.dir\src\db.cpp.obj CMakeFiles\University_database.dir\src\peselBirthDateParser.cpp.obj CMakeFiles\University_database.dir\src\main.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -ZI
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -113,11 +120,19 @@ build University_database.exe: CXX_EXECUTABLE_LINKER__University_database_Debug 
 
 build cmake_object_order_depends_target_University_database-ut: phony || cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
 
-build CMakeFiles\University_database-ut.dir\src\ut\test.cpp.obj: CXX_COMPILER__University_database-ut_unscanned_Debug C$:\Users\Pastor\source\repos\university_db-minproject\src\ut\test.cpp || cmake_object_order_depends_target_University_database-ut
+build CMakeFiles\University_database-ut.dir\src\ut\test_2.cpp.obj: CXX_COMPILER__University_database-ut_unscanned_Debug C$:\Users\Pastor\source\repos\university_db-minproject\src\ut\test_2.cpp || cmake_object_order_depends_target_University_database-ut
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++17 -ZI
   INCLUDES = -external:IC:\Users\Pastor\source\repos\university_db-minproject\out\build\x64-debug\_deps\googletest-src\googletest\include -external:IC:\Users\Pastor\source\repos\university_db-minproject\out\build\x64-debug\_deps\googletest-src\googletest -external:W0
   OBJECT_DIR = CMakeFiles\University_database-ut.dir
   OBJECT_FILE_DIR = CMakeFiles\University_database-ut.dir\src\ut
+  TARGET_COMPILE_PDB = CMakeFiles\University_database-ut.dir\
+  TARGET_PDB = University_database-ut.pdb
+
+build CMakeFiles\University_database-ut.dir\src\Person.cpp.obj: CXX_COMPILER__University_database-ut_unscanned_Debug C$:\Users\Pastor\source\repos\university_db-minproject\src\Person.cpp || cmake_object_order_depends_target_University_database-ut
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++17 -ZI
+  INCLUDES = -external:IC:\Users\Pastor\source\repos\university_db-minproject\out\build\x64-debug\_deps\googletest-src\googletest\include -external:IC:\Users\Pastor\source\repos\university_db-minproject\out\build\x64-debug\_deps\googletest-src\googletest -external:W0
+  OBJECT_DIR = CMakeFiles\University_database-ut.dir
+  OBJECT_FILE_DIR = CMakeFiles\University_database-ut.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\University_database-ut.dir\
   TARGET_PDB = University_database-ut.pdb
 
@@ -161,7 +176,7 @@ build CMakeFiles\University_database-ut.dir\src\peselBirthDateParser.cpp.obj: CX
 #############################################
 # Link the executable University_database-ut.exe
 
-build University_database-ut.exe University_database-ut[1]_tests.cmake | ${cmake_ninja_workdir}University_database-ut[1]_tests.cmake: CXX_EXECUTABLE_LINKER__University_database-ut_Debug CMakeFiles\University_database-ut.dir\src\ut\test.cpp.obj CMakeFiles\University_database-ut.dir\src\Student.cpp.obj CMakeFiles\University_database-ut.dir\src\pesel.cpp.obj CMakeFiles\University_database-ut.dir\src\db.cpp.obj CMakeFiles\University_database-ut.dir\src\peselBirthDateParser.cpp.obj | lib\gtest_main.lib lib\gtest.lib || lib\gtest.lib lib\gtest_main.lib
+build University_database-ut.exe University_database-ut[1]_tests.cmake | ${cmake_ninja_workdir}University_database-ut[1]_tests.cmake: CXX_EXECUTABLE_LINKER__University_database-ut_Debug CMakeFiles\University_database-ut.dir\src\ut\test_2.cpp.obj CMakeFiles\University_database-ut.dir\src\Person.cpp.obj CMakeFiles\University_database-ut.dir\src\Student.cpp.obj CMakeFiles\University_database-ut.dir\src\pesel.cpp.obj CMakeFiles\University_database-ut.dir\src\db.cpp.obj CMakeFiles\University_database-ut.dir\src\peselBirthDateParser.cpp.obj | lib\gtest_main.lib lib\gtest.lib || lib\gtest.lib lib\gtest_main.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -ZI
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = lib\gtest_main.lib  lib\gtest.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

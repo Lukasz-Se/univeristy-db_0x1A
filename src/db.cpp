@@ -105,14 +105,14 @@ bool db::saveToFile(std::string file)
 	std::ofstream fd(file, std::ios::out | std::ios::trunc);
 	if (fd)
 	{
-		for (auto student : m_Persons)
+		for (auto pearson : m_Persons)
 		{
 		
-			fd << student->m_name << "\n";
-			fd << student->m_surname << "\n";
-			fd << student->m_address << "\n";
-			fd << student->m_pesel.getPesel() << "\n";
-			fd << student->m_indeks_number << "\n";
+			fd << pearson->m_name << "\n";
+			fd << pearson->m_surname << "\n";
+			fd << pearson->m_address << "\n";
+			fd << pearson->m_pesel.getPesel() << "\n";
+			if (dynamic_cast<Student*>(pearson))
 		}
 		return true;
 	}

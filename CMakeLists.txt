@@ -8,6 +8,7 @@ endif()
 project ("University_database")
 
 set(ProjectFilesToCompile
+src/Person.cpp
 src/Student.cpp
 src/pesel.cpp
 src/db.cpp
@@ -15,7 +16,8 @@ src/peselBirthDateParser.cpp
  "src/main.cpp")
 
 set(TestFilesToCompile
-src/ut/test.cpp
+src/ut/test_2.cpp
+src/Person.cpp
 src/Student.cpp
 src/pesel.cpp
 src/db.cpp
