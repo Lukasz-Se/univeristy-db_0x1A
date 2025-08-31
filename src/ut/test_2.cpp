@@ -16,6 +16,11 @@ protected:
 	Student* student_3 = new Student;
 	Student* student_4 = new Student;
 
+	Employee* employee_1 = new Employee;
+	Employee* employee_2 = new Employee;
+	Employee* employee_3 = new Employee;
+	Employee* employee_4 = new Employee;
+
 	pesel pesel1, pesel2, pesel3, fake;
 
 	db university_db;
@@ -128,6 +133,44 @@ TEST_F(univeristyDBFixture, CheckStudentsAdd)
 	EXPECT_FALSE(university_db.addStudent(student_1));
 	EXPECT_FALSE(university_db.addStudent(student_3));
 	EXPECT_FALSE(university_db.addStudent(student_4));
+}
+
+TEST_F(univeristyDBFixture, CheckEmployeeAdd)
+{
+	employee_1->m_name = "Franek";
+	employee_1->m_surname = "Dolas";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("55101212346");
+
+	employee_2->m_name = "Franek";
+	employee_2->m_surname = "Dolas";
+	employee_2->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_2->m_salary = 2200;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("55101212346");
+
+	employee_3->m_name = "Hans";
+	employee_3->m_surname = "Kloss";
+	employee_3->m_address = "Stetinstrasse 77 Berlin";
+	employee_3->m_salary = 1002;
+	employee_3->m_gender = gender::male;
+	employee_3->m_pesel.set("23101212345");
+
+	employee_4->m_name = "Aliena";
+	employee_4->m_surname = "Shire";
+	employee_4->m_address = "Mainroad 11 Kingsbridge";
+	employee_4->m_salary = 1005;
+	employee_4->m_gender = gender::female;
+	employee_4->m_pesel.set("80012042518");
+
+	EXPECT_TRUE(university_db.addEmployee(employee_1));
+	EXPECT_FALSE(university_db.addEmployee(employee_2));
+	EXPECT_TRUE(university_db.addEmployee(employee_3));
+	EXPECT_FALSE(university_db.addEmployee(employee_1));
+	EXPECT_FALSE(university_db.addEmployee(employee_2));
+	EXPECT_FALSE(university_db.addEmployee(employee_4));
 }
 
 TEST_F(univeristyDBFixture, CheckDB)
