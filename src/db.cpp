@@ -115,7 +115,10 @@ bool db::saveToFile(std::string file)
 			fd << pearson->m_surname << "\n";
 			fd << pearson->m_address << "\n";
 			fd << pearson->m_pesel.getPesel() << "\n";
-			//if (dynamic_cast<Student*>(pearson))
+			if (dynamic_cast<Student*>(pearson))
+				fd << static_cast<Student*>(pearson)->m_indeks_number << "\n";
+			else if(dynamic_cast<Employee*>(pearson))
+				fd << static_cast<Employee*>(pearson)->m_salary << "\n";
 		}
 		return true;
 	}
