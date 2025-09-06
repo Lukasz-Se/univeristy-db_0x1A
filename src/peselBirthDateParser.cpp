@@ -11,7 +11,7 @@ peselBirthDateParser::peselBirthDateParser()
         if (m_counter == 12)
         {
             m_counter = 0;
-            i += 9;
+            i += 8;
         }
     }
 }

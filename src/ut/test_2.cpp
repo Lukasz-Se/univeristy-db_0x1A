@@ -209,28 +209,28 @@ TEST_F(univeristyDBFixture, CheckMixingStudentAndEmployeeAdd)
 	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
 	employee_1->m_salary = 1500;
 	employee_1->m_gender = gender::male;
-	employee_1->m_pesel.set("55101212346");
+	employee_1->m_pesel.set("61012658203");
 
 	employee_2->m_name = "Franek";
 	employee_2->m_surname = "Dolas";
 	employee_2->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
 	employee_2->m_salary = 2200;
 	employee_2->m_gender = gender::male;
-	employee_2->m_pesel.set("55101212346");
+	employee_2->m_pesel.set("61012658203");
 
 	employee_3->m_name = "Hans";
 	employee_3->m_surname = "Kloss";
 	employee_3->m_address = "Stetinstrasse 77 Berlin";
 	employee_3->m_salary = 1002;
 	employee_3->m_gender = gender::male;
-	employee_3->m_pesel.set("23101212345");
+	employee_3->m_pesel.set("26110479026");
 
 	employee_4->m_name = "Aliena";
 	employee_4->m_surname = "Shire";
 	employee_4->m_address = "Mainroad 11 Kingsbridge";
-	employee_4->m_salary = 1005;
+	employee_4->m_salary = 0;
 	employee_4->m_gender = gender::female;
-	employee_4->m_pesel.set("80012042518");
+	employee_4->m_pesel.set("19291285511");
 
 	EXPECT_TRUE(university_db.addEmployee(employee_1));
 	EXPECT_FALSE(university_db.addEmployee(employee_2));
@@ -271,7 +271,7 @@ TEST_F(univeristyDBFixture, CheckDB)
 	EXPECT_EQ(university_db.getDB(), expected);
 }
 
-TEST_F(univeristyDBFixture, SearchStudentBySurname)
+TEST_F(univeristyDBFixture, CheckMixingSearchStudentAndEmployeeBySurname)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -287,11 +287,30 @@ TEST_F(univeristyDBFixture, SearchStudentBySurname)
 	student_2->m_gender = gender::male;
 	student_2->m_pesel.set("23101212345");
 
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	employee_2->m_name = "Patryk";
+	employee_2->m_surname = "Nijaki";
+	employee_2->m_address = "Stetinstrasse 77 Berlin";
+	employee_2->m_salary = 1002;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("26110479026");
+
 	university_db.addStudent(student_1);
+	university_db.addEmployee(employee_1);
 	university_db.addStudent(student_2);
+	university_db.addEmployee(employee_2);
+
 	EXPECT_EQ(true, university_db.Search("Dolas"));
+	EXPECT_EQ(true, university_db.Search("Nijaki"));
 	EXPECT_NE(true, university_db.Search("Dolar"));
 	EXPECT_EQ(true, university_db.Search("Kloss"));
+	EXPECT_EQ(true, university_db.Search("Duda"));
 }
 
 TEST_F(univeristyDBFixture, SearchStudentByPesel)
