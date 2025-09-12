@@ -26,7 +26,7 @@ protected:
 	db university_db;
 };
 
-TEST_F(peselFixture, Check_length)
+TEST_F(peselFixture, PeselLength)
 {
 	// WHEN
 	std::string input_1 = "1234";
@@ -40,8 +40,8 @@ TEST_F(peselFixture, Check_length)
 	ASSERT_EQ(cut.set(input_3), pesel_error::WRONG_LENGTH);
 	ASSERT_EQ(cut.set(input_4), pesel_error::WRONG_LENGTH);
 }
-
-TEST_F(peselFixture, Check_ImproperCharacters)
+					 
+TEST_F(peselFixture, PeselmproperCharacters)
 {
 	// WHEN
 	std::string input_1 = "1234567891a";
@@ -59,8 +59,8 @@ TEST_F(peselFixture, Check_ImproperCharacters)
 	EXPECT_EQ(cut.set(input_5), pesel_error::NON_DIGITS);
 	EXPECT_EQ(cut.set(input_6), pesel_error::NON_DIGITS);
 }
-
-TEST_F(peselFixture, Check_Checksum)
+					 
+TEST_F(peselFixture, PeselChecksum)
 {
 	// WHEN
 	std::string input_1 = "55101212345";
@@ -74,8 +74,8 @@ TEST_F(peselFixture, Check_Checksum)
 	EXPECT_EQ(cut.set(input_3), pesel_error::OK);
 	EXPECT_EQ(cut.set(input_4), pesel_error::OK);
 }
-
-TEST_F(peselFixture, Check_BrithDayFormat)
+					 
+TEST_F(peselFixture, PeselBrithDayFormat)
 {
 	// WHEN
 	std::string input_1 = "55101212346";
@@ -97,7 +97,7 @@ TEST_F(peselFixture, Check_BrithDayFormat)
 	EXPECT_EQ(cut.set(input_8), pesel_error::WRONG_BDAY_FORMAT);
 }
 
-TEST_F(univeristyDBFixture, CheckStudentsAdd)
+TEST_F(univeristyDBFixture, StudentsAdd)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -135,7 +135,7 @@ TEST_F(univeristyDBFixture, CheckStudentsAdd)
 	EXPECT_FALSE(university_db.addStudent(student_4));
 }
 
-TEST_F(univeristyDBFixture, CheckEmployeeAdd)
+TEST_F(univeristyDBFixture, EmployeeAdd)
 {
 	employee_1->m_name = "Franek";
 	employee_1->m_surname = "Dolas";
@@ -173,7 +173,7 @@ TEST_F(univeristyDBFixture, CheckEmployeeAdd)
 	EXPECT_FALSE(university_db.addEmployee(employee_4));
 }
 
-TEST_F(univeristyDBFixture, CheckMixingStudentAndEmployeeAdd)
+TEST_F(univeristyDBFixture, MixingStudentAndEmployeeAdd)
 {
 
 	student_1->m_name = "Franek";
@@ -247,7 +247,7 @@ TEST_F(univeristyDBFixture, CheckMixingStudentAndEmployeeAdd)
 	EXPECT_FALSE(university_db.addStudent(student_4));
 }
 
-TEST_F(univeristyDBFixture, CheckDB)
+TEST_F(univeristyDBFixture, DB)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -271,7 +271,7 @@ TEST_F(univeristyDBFixture, CheckDB)
 	EXPECT_EQ(university_db.getDB(), expected);
 }
 
-TEST_F(univeristyDBFixture, CheckMixingSearchStudentAndEmployeeBySurname)
+TEST_F(univeristyDBFixture, MixingSearchStudentAndEmployeeBySurname)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -313,7 +313,7 @@ TEST_F(univeristyDBFixture, CheckMixingSearchStudentAndEmployeeBySurname)
 	EXPECT_EQ(true, university_db.Search("Duda"));
 }
 
-TEST_F(univeristyDBFixture, CheckMixingSearchStudentAndEmployeeByPesel)
+TEST_F(univeristyDBFixture, MixingSearchStudentAndEmployeeByPesel)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -433,7 +433,7 @@ TEST_F(univeristyDBFixture, SortByPesel)
 	university_db.addEmployee(employee_2);
 
 	university_db.SortByPesel();
-	EXPECT_EQ("Kloss;Nijaki;Dolas;Duda;Brunner;", university_db.getStudentsSurnames());
+	EXPECT_EQ("Kloss;Nijaki;Dolas;Duda;Brunner;", university_db.getBySurnames());
 }
 
 TEST_F(univeristyDBFixture, SortBySurname)
@@ -459,12 +459,93 @@ TEST_F(univeristyDBFixture, SortBySurname)
 	student_3->m_gender = gender::male;
 	student_3->m_pesel.set("79120405455");
 
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	employee_2->m_name = "Patryk";
+	employee_2->m_surname = "Nijaki";
+	employee_2->m_address = "Stetinstrasse 77 Berlin";
+	employee_2->m_salary = 1002;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("26110479026");
+
+	employee_3->m_name = "Hans";
+	employee_3->m_surname = "Kloss";
+	employee_3->m_address = "Stetinstrasse 77 Berlin";
+	employee_3->m_salary = 15000;
+	employee_3->m_gender = gender::male;
+	employee_3->m_pesel.set("96052512556");
+
 	university_db.addStudent(student_2);
 	university_db.addStudent(student_1);
 	university_db.addStudent(student_3);
+	university_db.addEmployee(employee_1);
+	university_db.addEmployee(employee_2);
+	university_db.addEmployee(employee_3);
 
 	university_db.SortBySurname();
-	EXPECT_EQ("Brunner;Dolas;Kloss;", university_db.getStudentsSurnames());
+	
+	EXPECT_EQ("Brunner;Dolas;Duda;Kloss;Kloss;Nijaki;", university_db.getBySurnames());
+}
+
+TEST_F(univeristyDBFixture, SortBySalary)
+{
+	student_1->m_name = "Franek";
+	student_1->m_surname = "Dolas";
+	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	student_1->m_indeks_number = 1001;
+	student_1->m_gender = gender::male;
+	student_1->m_pesel.set("55101212346");
+
+	student_2->m_name = "Hans";
+	student_2->m_surname = "Kloss";
+	student_2->m_address = "Stetinstrasse 77 Berlin";
+	student_2->m_indeks_number = 1002;
+	student_2->m_gender = gender::male;
+	student_2->m_pesel.set("23101212345");
+
+	student_3->m_name = "Hermann";
+	student_3->m_surname = "Brunner";
+	student_3->m_address = "Warszawsk 15 Olsztyn";
+	student_3->m_indeks_number = 1003;
+	student_3->m_gender = gender::male;
+	student_3->m_pesel.set("79120405455");
+
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	employee_2->m_name = "Patryk";
+	employee_2->m_surname = "Nijaki";
+	employee_2->m_address = "Stetinstrasse 77 Berlin";
+	employee_2->m_salary = 1002;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("26110479026");
+
+	employee_3->m_name = "Hans";
+	employee_3->m_surname = "Kloss";
+	employee_3->m_address = "Stetinstrasse 77 Berlin";
+	employee_3->m_salary = 15000;
+	employee_3->m_gender = gender::male;
+	employee_3->m_pesel.set("96052512556");
+
+	university_db.addStudent(student_2);
+	university_db.addStudent(student_1);
+	university_db.addStudent(student_3);
+	university_db.addEmployee(employee_1);
+	university_db.addEmployee(employee_2);
+	university_db.addEmployee(employee_3);
+
+	university_db.SortBySalary();
+	
+	EXPECT_EQ("Kloss;Dolas;Brunner;Nijaki;Duda;Kloss;", university_db.getBySurnames());
 }
 
 TEST_F(univeristyDBFixture, ClearDB)

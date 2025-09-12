@@ -47,15 +47,15 @@ int main()
 	//university_db.addStudent(student_4);
 
 	university_db.saveToFile();
-	std::cout << "Lista studentow:" << university_db.getStudentsSurnames() << std::endl;
+	std::cout << "Lista studentow:" << university_db.getBySurnames() << std::endl;
 
 	university_db.Clear();
 
-	std::cout << "Lista studentow:" << university_db.getStudentsSurnames() << std::endl;
+	std::cout << "Lista studentow:" << university_db.getBySurnames() << std::endl;
 
 	university_db.readFromFile();
 
-	std::cout << "Lista studentow:" << university_db.getStudentsSurnames() << std::endl;
+	std::cout << "Lista studentow:" << university_db.getBySurnames() << std::endl;
 
 	std::cout << std::endl << university_db.getDB() << std::endl;
 

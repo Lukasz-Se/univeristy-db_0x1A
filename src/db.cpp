@@ -48,6 +48,15 @@ void db::SortBySurname()
 	std::sort(begin(m_Persons), end(m_Persons), [](Person* first, Person* second) {return first->m_surname < second->m_surname; });
 }
 
+void db::SortBySalary()
+{
+	std::sort(begin(m_Persons), end(m_Persons), [](Person* first, Person* second) 
+		{
+			if (dynamic_cast<Employee*>(first) && dynamic_cast<Employee*>(second)) 
+				return static_cast<Employee*>(first)->m_salary < static_cast<Employee*>(second)->m_salary; 
+		});
+}
+
 bool db::removeStudent(unsigned int indexNr)
 {
 	Student* p_tempStudentPtr = nullptr;
@@ -66,7 +75,7 @@ bool db::removeStudent(unsigned int indexNr)
 	return false;
 }
 
-std::string db::getStudentsSurnames() const
+std::string db::getBySurnames() const
 {
 	std::string output;
 	for (auto student : m_Persons)

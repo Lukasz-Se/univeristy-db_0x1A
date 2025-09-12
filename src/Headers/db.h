@@ -19,10 +19,11 @@ public:
 	bool Search(const pesel& pesel) const;
 	void SortByPesel();
 	void SortBySurname();
+	void SortBySalary();
 
 	bool removeStudent(unsigned int indexNr);
 	
-	std::string getStudentsSurnames() const;
+	std::string getBySurnames() const;
 	std::string getDB();
 	
 	void Clear();
