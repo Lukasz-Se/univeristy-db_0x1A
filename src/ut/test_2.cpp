@@ -564,30 +564,41 @@ TEST_F(univeristyDBFixture, ClearDB)
 	student_2->m_gender = gender::male;
 	student_2->m_pesel.set("23101212345");
 
-	student_3->m_name = "Hermann";
-	student_3->m_surname = "Brunner";
-	student_3->m_address = "Warszawsk 15 Olsztyn";
-	student_3->m_indeks_number = 1003;
-	student_3->m_gender = gender::male;
-	student_3->m_pesel.set("79120405455");
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	employee_2->m_name = "Patryk";
+	employee_2->m_surname = "Nijaki";
+	employee_2->m_address = "Stetinstrasse 77 Berlin";
+	employee_2->m_salary = 1002;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("26110479026");
 
 	university_db.addStudent(student_2);
 	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
+	university_db.addEmployee(employee_1);
+	university_db.addEmployee(employee_2);
 
 	pesel1 = student_1->m_pesel;
 	pesel2 = student_2->m_pesel;
-	pesel3 = student_3->m_pesel;
+	pesel3 = employee_1->m_pesel;
+	pesel4 = employee_2->m_pesel;
 
 	EXPECT_TRUE(university_db.Search(pesel1));
 	EXPECT_TRUE(university_db.Search(pesel2));
 	EXPECT_TRUE(university_db.Search(pesel3));
+	EXPECT_TRUE(university_db.Search(pesel4));
 
 	university_db.Clear();
 
 	EXPECT_FALSE(university_db.Search(pesel1));
 	EXPECT_FALSE(university_db.Search(pesel2));
 	EXPECT_FALSE(university_db.Search(pesel3));
+	EXPECT_FALSE(university_db.Search(pesel4));
 
 	fake.set("791204054565");
 	EXPECT_FALSE(university_db.Search(fake));
