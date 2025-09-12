@@ -119,15 +119,20 @@ bool db::saveToFile(std::string file)
 	{
 		for (auto pearson : m_Persons)
 		{
-		
-			fd << pearson->m_name << "\n";
-			fd << pearson->m_surname << "\n";
-			fd << pearson->m_address << "\n";
-			fd << pearson->m_pesel.getPesel() << "\n";
 			if (dynamic_cast<Student*>(pearson))
-				fd << static_cast<Student*>(pearson)->m_indeks_number << "\n";
-			else if(dynamic_cast<Employee*>(pearson))
+			{
+				fd << "Employee;";
 				fd << static_cast<Employee*>(pearson)->m_salary << "\n";
+			}
+			else if (dynamic_cast<Employee*>(pearson))
+			{
+				fd << "Student;";
+				fd << static_cast<Student*>(pearson)->m_indeks_number << "\n";
+			}
+			fd << pearson->m_name << ";";
+			fd << pearson->m_surname << ";";
+			fd << pearson->m_address << ";";
+			fd << pearson->m_pesel.getPesel() << ";";
 		}
 		return true;
 	}
