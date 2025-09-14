@@ -4,7 +4,7 @@
 enum class gender
 {
     male,
-    female
+    female,
 };
 
 class Person

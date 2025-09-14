@@ -10,7 +10,7 @@ std::string Employee::getData()
     else
         gender_str = "female";
 
-    output << m_name << ";" << m_surname << ";" << m_address << ";" << gender_str << ";" << m_pesel.getPesel() << ";" << m_salary << ";";
+    output << "e;" << m_name << ";" << m_surname << ";" << m_address << ";" << gender_str << ";" << m_pesel.getPesel() << ";" << m_salary << ";";
 
     return output.str();
 }

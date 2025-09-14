@@ -103,6 +103,7 @@ bool db::alreadyExist(const pesel pesel) const
 			return true;
 	return false;
 }
+
 void db::Clear()
 {
 	std::for_each(begin(m_Persons), end(m_Persons), [](Person* pPerson) {
@@ -119,20 +120,8 @@ bool db::saveToFile(std::string file)
 	{
 		for (auto pearson : m_Persons)
 		{
-			if (dynamic_cast<Student*>(pearson))
-			{
-				fd << "Employee;";
-				fd << static_cast<Employee*>(pearson)->m_salary << "\n";
-			}
-			else if (dynamic_cast<Employee*>(pearson))
-			{
-				fd << "Student;";
-				fd << static_cast<Student*>(pearson)->m_indeks_number << "\n";
-			}
-			fd << pearson->m_name << ";";
-			fd << pearson->m_surname << ";";
-			fd << pearson->m_address << ";";
-			fd << pearson->m_pesel.getPesel() << ";";
+			fd << pearson->getData();
+			fd << "\n";
 		}
 		return true;
 	}
@@ -145,32 +134,55 @@ bool db::readFromFile(std::string file)
 	
 	if (fd.is_open())
 	{
-		std::string buffor;
-		Student* pTempStudent = new Student;
-
-		int value = 0;
-		while (!std::getline(fd, buffor, '\n').eof())
-		{
-			if (value == 0)
-				pTempStudent->m_name = buffor;
-			else if (value == 1)
-				pTempStudent->m_surname = buffor;
-			else if (value == 2)
-				pTempStudent->m_address = buffor;
-			else if (value == 3)
-				pTempStudent->m_pesel.set(buffor);
-			else if (value == 4)
-				pTempStudent->m_indeks_number = stoi(buffor);
-
-			value++;
-
-			if (value > 4)
+		std::string buffor, line;
+		std::vector <std::string> properties;
+	
+		while (std::getline(fd, buffor, '\n'))
+		{		
+			std::stringstream ss(buffor);
+			while (std::getline(ss, line, ';'))
 			{
-				value = 0;
-				addStudent(pTempStudent);
-				pTempStudent = new Student;
+				properties.push_back(line);
 			}
+
+			if (properties[0] == "s")
+			{
+				Student* temp = new Student;
+				temp->m_name = properties[1];
+				temp->m_surname = properties[2];
+				temp->m_address = properties[3];
+
+				if (properties[4] == "male")
+					temp->m_gender = gender::male;
+				else if (properties[4] == "female")
+					temp->m_gender = gender::female;
+
+				temp->m_pesel.set(properties[5]);
+				temp->m_indeks_number = std::stoi(properties[6]);
+
+				m_Persons.push_back(temp);
+			}
+			if (properties[0] == "e")
+			{
+				Employee* temp = new Employee;
+				temp->m_name = properties[1];
+				temp->m_surname = properties[2];
+				temp->m_address = properties[3];
+
+				if (properties[4] == "male")
+					temp->m_gender = gender::male;
+				else if (properties[4] == "female")
+					temp->m_gender = gender::female;
+
+				temp->m_pesel.set(properties[5]);
+				temp->m_salary = std::stoi(properties[6]);
+
+				m_Persons.push_back(temp);
+			}
+
+			properties.clear();
 		}
+		
 		return true;
 	}
 	return false;
