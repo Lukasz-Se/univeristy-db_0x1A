@@ -24,9 +24,13 @@ bool db::addEmployee(Employee* employeeInput)
 	return true;
 }
 
-bool db::Search(const std::string& surname) const
-{	
-	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Person* student) {return student->m_surname == surname; });
+bool db::Search(const std::string& surname, Person* returnValue)
+{
+	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname, returnValue](Person* person) mutable{
+		returnValue = person;
+		return person->m_surname == surname; 
+		});
+
 	if (result != m_Persons.end())
 		return true;
 
@@ -55,6 +59,11 @@ void db::SortBySalary()
 			if (dynamic_cast<Employee*>(first) && dynamic_cast<Employee*>(second)) 
 				return static_cast<Employee*>(first)->m_salary < static_cast<Employee*>(second)->m_salary; 
 		});
+}
+
+bool db::ChangeSalary(const pesel& pesel)
+{
+	return false;
 }
 
 bool db::RemovePerson(unsigned int indexNr)

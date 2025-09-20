@@ -16,11 +16,13 @@ public:
 	~db();
 	bool addStudent(Student* studentInput);
 	bool addEmployee(Employee* employeeInput);
-	bool Search(const std::string& surname) const;
+	bool Search(const std::string& surname, Person* returnValue = nullptr);
 	bool Search(const pesel& pesel) const;
 	void SortByPesel();
 	void SortBySurname();
 	void SortBySalary();
+
+	bool ChangeSalary(const pesel& pesel);
 
 	bool RemovePerson(unsigned int indexNr);
 	bool RemovePerson(pesel pesel);

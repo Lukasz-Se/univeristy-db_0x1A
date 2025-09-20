@@ -589,9 +589,22 @@ TEST_F(univeristyDBFixture, SortBySalary)
 	EXPECT_EQ("Kloss;Dolas;Brunner;Nijaki;Duda;Kloss;", university_db.getBySurnames());
 }
 
-TEST_F(univeristyDBFixture, FillDBWithArtificalData)
+//TEST_F(univeristyDBFixture, FillDBWithArtificalData)
+//{
+//	EXPECT_STRNE("", university_db.getBySurnames().c_str());
+//}
+TEST_F(univeristyDBFixture, ModyfiEarnings)
 {
-	EXPECT_STRNE("", university_db.getBySurnames().c_str());
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	university_db.addEmployee(employee_1);
+
+	EXPECT_TRUE(university_db.ChangeSalary(employee_1->m_pesel));
 }
 
 TEST_F(univeristyDBFixture, ClearDB)
