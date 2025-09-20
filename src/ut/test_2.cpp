@@ -365,6 +365,44 @@ TEST_F(univeristyDBFixture, RemoveStudendByIndexNumber)
 	EXPECT_FALSE(university_db.Search("Dolas"));
 }
 
+TEST_F(univeristyDBFixture, DeletePersonByPesel)
+{
+	student_1->m_name = "Franek";
+	student_1->m_surname = "Dolas";
+	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	student_1->m_indeks_number = 1001;
+	student_1->m_gender = gender::male;
+	student_1->m_pesel.set("55101212346");
+
+	student_2->m_name = "Hans";
+	student_2->m_surname = "Kloss";
+	student_2->m_address = "Stetinstrasse 77 Berlin";
+	student_2->m_indeks_number = 1002;
+	student_2->m_gender = gender::male;
+	student_2->m_pesel.set("23101212345");
+
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	employee_2->m_name = "Patryk";
+	employee_2->m_surname = "Nijaki";
+	employee_2->m_address = "Stetinstrasse 77 Berlin";
+	employee_2->m_salary = 1002;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("26110479026");
+
+	university_db.addStudent(student_1);
+	university_db.addEmployee(employee_1);
+	university_db.addStudent(student_2);
+	university_db.addEmployee(employee_2);
+
+	EXPECT_FALSE(university_db.Search("Dolas"));
+}
+
 TEST_F(univeristyDBFixture, DB)
 {
 	student_1->m_name = "Franek";
