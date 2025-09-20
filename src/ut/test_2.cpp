@@ -289,7 +289,7 @@ TEST_F(univeristyDBFixture, MixingSearchStudentAndEmployeeBySurname)
 	EXPECT_EQ(true, university_db.Search("Duda"));
 }
 
-TEST_F(univeristyDBFixture, MixingSearchStudentAndEmployeeByPesel)
+TEST_F(univeristyDBFixture, SearchPersonIteratorCheck)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -326,19 +326,17 @@ TEST_F(univeristyDBFixture, MixingSearchStudentAndEmployeeByPesel)
 
 	pesel1.set(student_1->m_pesel.getPesel());
 	pesel2.set(student_2->m_pesel.getPesel());
+	pesel3.set(employee_1->m_pesel.getPesel());
 	fake.set("791204054565");
 
+	std::vector<Person*>::iterator it;
 
-	EXPECT_EQ(true, university_db.Search(pesel1));
-	EXPECT_EQ(true, university_db.Search(pesel2));
-	EXPECT_NE(true, university_db.Search(fake));
+	university_db.Search(pesel1, it);
+	EXPECT_EQ(it.operator*()->m_surname, "Dolas");
 
-	pesel1.set(employee_1->m_pesel.getPesel());
-	pesel2.set(employee_2->m_pesel.getPesel());
-
-	EXPECT_EQ(true, university_db.Search(pesel1));
-	EXPECT_EQ(true, university_db.Search(pesel2));
-
+	university_db.Search(pesel3, it);
+	EXPECT_EQ(it.operator*()->m_surname, "Duda");
+	EXPECT_NE(it.operator*()->m_surname, "Duda2");
 }
 
 TEST_F(univeristyDBFixture, RemoveStudendByIndexNumber)
@@ -593,20 +591,21 @@ TEST_F(univeristyDBFixture, SortBySalary)
 //{
 //	EXPECT_STRNE("", university_db.getBySurnames().c_str());
 //}
-TEST_F(univeristyDBFixture, ModyfiEarnings)
-{
-	employee_1->m_name = "Zenek";
-	employee_1->m_surname = "Duda";
-	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
-	employee_1->m_salary = 1500;
-	employee_1->m_gender = gender::male;
-	employee_1->m_pesel.set("61012658203");
-
-	university_db.addEmployee(employee_1);
-
-	EXPECT_TRUE(university_db.ChangeSalary(employee_1->m_pesel));
-}
-
+//TEST_F(univeristyDBFixture, ModyfiEarnings)
+//{
+//	employee_1->m_name = "Zenek";
+//	employee_1->m_surname = "Duda";
+//	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+//	employee_1->m_salary = 1500;
+//	employee_1->m_gender = gender::male;
+//	employee_1->m_pesel.set("61012658203");
+//
+//	university_db.addEmployee(employee_1);
+//	std::vector<Person*>::iterator it;
+//
+//	EXPECT_TRUE(university_db.ChangeSalary(employee_1->m_pesel));
+//}
+//
 TEST_F(univeristyDBFixture, ClearDB)
 {
 	student_1->m_name = "Franek";

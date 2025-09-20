@@ -24,11 +24,10 @@ bool db::addEmployee(Employee* employeeInput)
 	return true;
 }
 
-bool db::Search(const std::string& surname, Person* returnValue)
+bool db::Search(const std::string& surname)
 {
-	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname, returnValue](Person* person) mutable{
-		returnValue = person;
-		return person->m_surname == surname; 
+	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Person* person){
+		return person->m_surname == surname;
 		});
 
 	if (result != m_Persons.end())
@@ -37,9 +36,41 @@ bool db::Search(const std::string& surname, Person* returnValue)
 	return false;
 }
 
+bool db::Search(const std::string& surname, std::vector<Person*>::iterator& returnValue)
+{
+	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Person* person){
+		return person->m_surname == surname;
+		});
+
+	if (result != m_Persons.end())
+	{
+		returnValue = result;
+		return true;
+	}
+
+	return false;
+}
+
 bool db::Search(const pesel& pesel) const
 {
 	return alreadyExist(pesel);
+}
+
+bool db::Search(const pesel& pesel, std::vector<Person*>::iterator& returnValue)
+{
+	if (pesel.getPesel() != "")
+	{
+		auto result = std::find_if(begin(m_Persons), end(m_Persons), [pesel](Person* pPerson) {
+			return pPerson->m_pesel.getPesel() == pesel.getPesel();
+			});
+
+		if (result != m_Persons.end())
+		{
+			returnValue = result;
+			return true;
+		}
+	}
+	return false;
 }
 
 void db::SortByPesel()
