@@ -589,6 +589,11 @@ TEST_F(univeristyDBFixture, SortBySalary)
 	EXPECT_EQ("Kloss;Dolas;Brunner;Nijaki;Duda;Kloss;", university_db.getBySurnames());
 }
 
+TEST_F(univeristyDBFixture, FillDBWithArtificalData)
+{
+	EXPECT_STRNE("", university_db.getBySurnames().c_str());
+}
+
 TEST_F(univeristyDBFixture, ClearDB)
 {
 	student_1->m_name = "Franek";
