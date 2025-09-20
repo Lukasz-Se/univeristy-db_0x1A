@@ -57,7 +57,7 @@ void db::SortBySalary()
 		});
 }
 
-bool db::removeStudent(unsigned int indexNr)
+bool db::RemovePerson(unsigned int indexNr)
 {
 	Student* p_tempStudentPtr = nullptr;
 	auto result = std::find_if(begin(m_Persons), end(m_Persons), [indexNr, p_tempStudentPtr](Person* student) mutable{

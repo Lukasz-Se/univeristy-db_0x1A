@@ -22,7 +22,7 @@ public:
 	void SortBySurname();
 	void SortBySalary();
 
-	bool removeStudent(unsigned int indexNr);
+	bool RemovePerson(unsigned int indexNr);
 	bool RemovePerson(pesel pesel);
 	
 	std::string getBySurnames() const;

@@ -360,8 +360,8 @@ TEST_F(univeristyDBFixture, RemoveStudendByIndexNumber)
 	university_db.addStudent(student_1);
 	university_db.addStudent(student_2);
 
-	EXPECT_FALSE(university_db.removeStudent(1005));
-	EXPECT_TRUE(university_db.removeStudent(student_1->m_indeks_number));
+	EXPECT_FALSE(university_db.RemovePerson(1005));
+	EXPECT_TRUE(university_db.RemovePerson(student_1->m_indeks_number));
 	EXPECT_FALSE(university_db.Search("Dolas"));
 }
 
