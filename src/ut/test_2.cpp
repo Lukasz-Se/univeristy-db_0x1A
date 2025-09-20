@@ -400,7 +400,10 @@ TEST_F(univeristyDBFixture, DeletePersonByPesel)
 	university_db.addStudent(student_2);
 	university_db.addEmployee(employee_2);
 
+	university_db.RemovePerson(student_1->m_pesel);
+	university_db.RemovePerson(employee_2->m_pesel);
 	EXPECT_FALSE(university_db.Search("Dolas"));
+	EXPECT_FALSE(university_db.Search("Nijaki"));
 }
 
 TEST_F(univeristyDBFixture, DB)

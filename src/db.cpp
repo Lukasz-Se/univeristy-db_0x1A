@@ -75,6 +75,24 @@ bool db::removeStudent(unsigned int indexNr)
 	return false;
 }
 
+bool db::RemovePerson(pesel pesel)
+{
+	Person* p_tempPersonPtr = nullptr;
+	auto result = std::find_if(begin(m_Persons), end(m_Persons), [pesel, p_tempPersonPtr](Person* person) mutable {
+		p_tempPersonPtr = person;
+		return p_tempPersonPtr->m_pesel.getPesel() == pesel.getPesel(); }
+	);
+
+	if (result != m_Persons.end())
+	{
+		delete p_tempPersonPtr;
+		m_Persons.erase(result);
+		return true;
+	}
+
+	return false;
+}
+
 std::string db::getBySurnames() const
 {
 	std::string output;
