@@ -406,7 +406,7 @@ TEST_F(univeristyDBFixture, DeletePersonByPesel)
 	EXPECT_FALSE(university_db.Search("Nijaki"));
 }
 
-TEST_F(univeristyDBFixture, DB)
+TEST_F(univeristyDBFixture, PrintDB)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
