@@ -41,11 +41,6 @@ bool db::Search(const std::string& surname, std::vector<Person*>::iterator& retu
 	return false;
 }
 
-bool db::Search(const pesel& pesel) const
-{
-	return alreadyExist(pesel);
-}
-
 bool db::Search(const pesel& pesel, std::vector<Person*>::iterator& returnValue)
 {
 	if (pesel.getPesel() != "")

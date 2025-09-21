@@ -247,7 +247,55 @@ TEST_F(univeristyDBFixture, MixingStudentAndEmployeeAdd)
 	EXPECT_FALSE(university_db.addStudent(student_4));
 }
 
-TEST_F(univeristyDBFixture, MixingSearchStudentAndEmployeeBySurname)
+TEST_F(univeristyDBFixture, SearchPersonByPesel)
+{
+	student_1->m_name = "Franek";
+	student_1->m_surname = "Dolas";
+	student_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	student_1->m_indeks_number = 1001;
+	student_1->m_gender = gender::male;
+	student_1->m_pesel.set("55101212346");
+
+	student_2->m_name = "Hans";
+	student_2->m_surname = "Kloss";
+	student_2->m_address = "Stetinstrasse 77 Berlin";
+	student_2->m_indeks_number = 1002;
+	student_2->m_gender = gender::male;
+	student_2->m_pesel.set("23101212345");
+
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	employee_2->m_name = "Patryk";
+	employee_2->m_surname = "Nijaki";
+	employee_2->m_address = "Stetinstrasse 77 Berlin";
+	employee_2->m_salary = 1002;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("26110479026");
+
+	university_db.addStudent(student_1);
+	university_db.addEmployee(employee_1);
+	university_db.addStudent(student_2);
+	university_db.addEmployee(employee_2);
+
+	pesel1.set(student_1->m_pesel.getPesel());
+	pesel2.set(student_2->m_pesel.getPesel());
+	pesel3.set(employee_1->m_pesel.getPesel());
+	pesel4.set(employee_2->m_pesel.getPesel());
+	fake.set("791204054565");
+
+	EXPECT_EQ(true, university_db.Search(pesel1));
+	EXPECT_EQ(true, university_db.Search(pesel2));
+	EXPECT_NE(true, university_db.Search(fake));
+	EXPECT_EQ(true, university_db.Search(pesel3));
+	EXPECT_EQ(true, university_db.Search(pesel4));
+}
+
+TEST_F(univeristyDBFixture, SearchPersonBySurname)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -289,7 +337,7 @@ TEST_F(univeristyDBFixture, MixingSearchStudentAndEmployeeBySurname)
 	EXPECT_EQ(true, university_db.Search("Duda"));
 }
 
-TEST_F(univeristyDBFixture, SearchPersonByPeselIteratorCheck)
+TEST_F(univeristyDBFixture, SearchPersonByPeselWithIterator)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -339,7 +387,7 @@ TEST_F(univeristyDBFixture, SearchPersonByPeselIteratorCheck)
 	EXPECT_NE(it.operator*()->m_surname, "Duda2");
 }
 
-TEST_F(univeristyDBFixture, SearchPersonBySurameIteratorCheck)
+TEST_F(univeristyDBFixture, SearchPersonBySurameWithIterator)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
