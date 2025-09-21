@@ -339,7 +339,7 @@ TEST_F(univeristyDBFixture, SearchPersonByPeselIteratorCheck)
 	EXPECT_NE(it.operator*()->m_surname, "Duda2");
 }
 
-TEST_F(univeristyDBFixture, SearchPersonByNameIteratorCheck)
+TEST_F(univeristyDBFixture, SearchPersonBySurameIteratorCheck)
 {
 	student_1->m_name = "Franek";
 	student_1->m_surname = "Dolas";
@@ -637,6 +637,7 @@ TEST_F(univeristyDBFixture, SortBySalary)
 //{
 //	EXPECT_STRNE("", university_db.getBySurnames().c_str());
 //}
+
 TEST_F(univeristyDBFixture, ModyfiEarnings)
 {
 	employee_1->m_name = "Zenek";

@@ -1,5 +1,7 @@
 #include "Headers/db.h"
 
+std::vector<Person*> db::m_Persons;
+
 db::~db()
 {
 	Clear();
@@ -22,18 +24,6 @@ bool db::addEmployee(Employee* employeeInput)
 
 	m_Persons.push_back(employeeInput);
 	return true;
-}
-
-bool db::Search(const std::string& surname)
-{
-	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Person* person){
-		return person->m_surname == surname;
-		});
-
-	if (result != m_Persons.end())
-		return true;
-
-	return false;
 }
 
 bool db::Search(const std::string& surname, std::vector<Person*>::iterator& returnValue)
@@ -161,7 +151,7 @@ std::string db::getDB()
 	return output;
 }
 
-bool db::alreadyExist(const pesel pesel) const 
+bool db::alreadyExist(const pesel& pesel) const 
 {
 	if (pesel.getPesel() != "")
 		if (std::any_of(begin(m_Persons), end(m_Persons), [pesel](Person* pPerson) {return pPerson->m_pesel.getPesel() == pesel.getPesel(); }))

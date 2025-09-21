@@ -3,7 +3,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <array>
 #include <algorithm>
 #include <sstream>
 
@@ -16,8 +15,7 @@ public:
 	~db();
 	bool addStudent(Student* studentInput);
 	bool addEmployee(Employee* employeeInput);
-	bool Search(const std::string& surname);
-	bool Search(const std::string& surname, std::vector<Person*>::iterator& returnValue);
+	bool Search(const std::string& surname, std::vector<Person*>::iterator& returnValue = m_Persons.end());
 	bool Search(const pesel& pesel) const;
 	bool Search(const pesel& pesel, std::vector<Person*>::iterator& returnValue);
 	void SortByPesel();
@@ -37,8 +35,8 @@ public:
 	bool readFromFile(std::string file = "db.dat");
 
 private:
-	std::vector<Person*> m_Persons;
+	static std::vector<Person*> m_Persons;
 
-	bool alreadyExist(const pesel pesel) const;
+	bool alreadyExist(const pesel& pesel) const;
 
 };
