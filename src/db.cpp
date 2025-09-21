@@ -92,8 +92,15 @@ void db::SortBySalary()
 		});
 }
 
-bool db::ChangeSalary(const pesel& pesel)
+bool db::ChangeSalary(const pesel& pesel, unsigned int new_salary)
 {
+	std::vector<Person*>::iterator it;
+	if (Search(pesel, it) && dynamic_cast<Employee*>(it.operator*()))
+	{
+		dynamic_cast<Employee*>(it.operator*())->m_salary = new_salary;
+		return true;
+	}
+	
 	return false;
 }
 

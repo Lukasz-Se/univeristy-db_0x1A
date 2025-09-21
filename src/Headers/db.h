@@ -24,7 +24,7 @@ public:
 	void SortBySurname();
 	void SortBySalary();
 
-	bool ChangeSalary(const pesel& pesel);
+	bool ChangeSalary(const pesel& pesel, unsigned int new_salary);
 
 	bool RemovePerson(unsigned int indexNr);
 	bool RemovePerson(pesel pesel);
