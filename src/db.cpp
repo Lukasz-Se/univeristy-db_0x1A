@@ -146,14 +146,6 @@ std::string db::getDB()
 	return output;
 }
 
-bool db::alreadyExist(const pesel& pesel) const 
-{
-	if (pesel.getPesel() != "")
-		if (std::any_of(begin(m_Persons), end(m_Persons), [pesel](Person* pPerson) {return pPerson->m_pesel.getPesel() == pesel.getPesel(); }))
-			return true;
-	return false;
-}
-
 void db::Clear()
 {
 	std::for_each(begin(m_Persons), end(m_Persons), [](Person* pPerson) {
@@ -198,36 +190,12 @@ bool db::readFromFile(std::string file)
 			if (properties[0] == "s")
 			{
 				Student* temp = new Student;
-				temp->m_name = properties[1];
-				temp->m_surname = properties[2];
-				temp->m_address = properties[3];
-
-				if (properties[4] == "male")
-					temp->m_gender = gender::male;
-				else if (properties[4] == "female")
-					temp->m_gender = gender::female;
-
-				temp->m_pesel.set(properties[5]);
-				temp->m_indeks_number = std::stoi(properties[6]);
-
-				m_Persons.push_back(temp);
+				CreatePersonObject(temp, properties);
 			}
 			if (properties[0] == "e")
 			{
 				Employee* temp = new Employee;
-				temp->m_name = properties[1];
-				temp->m_surname = properties[2];
-				temp->m_address = properties[3];
-
-				if (properties[4] == "male")
-					temp->m_gender = gender::male;
-				else if (properties[4] == "female")
-					temp->m_gender = gender::female;
-
-				temp->m_pesel.set(properties[5]);
-				temp->m_salary = std::stoi(properties[6]);
-
-				m_Persons.push_back(temp);
+				CreatePersonObject(temp, properties);
 			}
 
 			properties.clear();
@@ -236,4 +204,37 @@ bool db::readFromFile(std::string file)
 		return true;
 	}
 	return false;
+}
+
+bool db::alreadyExist(const pesel& pesel) const
+{
+	if (pesel.getPesel() != "")
+		if (std::any_of(begin(m_Persons), end(m_Persons), [pesel](Person* pPerson) {return pPerson->m_pesel.getPesel() == pesel.getPesel(); }))
+			return true;
+	return false;
+}
+
+void db::CreatePersonObject(Person* ppPerson, std::vector<std::string> data)
+{
+	ppPerson->m_name = data[1];
+	ppPerson->m_surname = data[2];
+	ppPerson->m_address = data[3];
+
+	if (data[4] == "male")
+		ppPerson->m_gender = gender::male;
+	else if (data[4] == "female")
+		ppPerson->m_gender = gender::female;
+
+	ppPerson->m_pesel.set(data[5]);
+
+	if (data[0] == "s")
+	{
+		dynamic_cast<Student*>(ppPerson)->m_indeks_number = std::stoi(data[6]);
+		m_Persons.push_back(dynamic_cast<Student*>(ppPerson));
+	}
+	else if (data[0] == "e")
+	{
+		dynamic_cast<Employee*>(ppPerson)->m_salary = std::stoi(data[6]);
+		m_Persons.push_back(dynamic_cast<Employee*>(ppPerson));
+	}
 }

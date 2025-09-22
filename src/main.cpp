@@ -36,6 +36,13 @@ int main()
 	student_3->m_gender = gender::male;
 	student_3->m_pesel.set("79120405455");
 
+	student_4->m_name = "Adrian";
+	student_4->m_surname = "Zandberg";
+	student_4->m_address = "Humpelstrassse 22, Kopenhagen";
+	student_4->m_indeks_number = 1004;
+	student_4->m_gender = gender::male;
+	student_4->m_pesel.set("79120405455");
+
 	employee_1->m_name = "Franek";
 	employee_1->m_surname = "Duda";
 	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
@@ -50,17 +57,10 @@ int main()
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	//student_4->m_name = "Adrian";
-	//student_4->m_surname = "Zandberg";
-	//student_4->m_address = "Humpelstrassse 22, Kopenhagen";
-	//student_4->m_indeks_number = 1004;
-	//student_4->m_gender = gender::male;
-	//student_4->m_pesel.set("79120405455");
-
 	university_db.addStudent(student_1);
 	university_db.addStudent(student_2);
-	//university_db.addStudent(student_3);
-	//university_db.addStudent(student_4);
+	university_db.addStudent(student_3);
+	university_db.addStudent(student_4);
 	university_db.addEmployee(employee_1);
 	university_db.addEmployee(employee_2);
 
@@ -69,19 +69,20 @@ int main()
 
 	university_db.Clear();
 
-	std::cout << "Lista:" << university_db.getBySurnames() << std::endl;
+	std::cout << "Lista (po wyczyszczeniu):" << university_db.getBySurnames() << std::endl;
 
-	//university_db.readFromFile();
+	university_db.readFromFile();
 
-	//std::cout << "Lista studentow:" << university_db.getBySurnames() << std::endl;
+	std::cout << "Lista (po wczytaniu):" << university_db.getBySurnames() << std::endl;
 
 	std::cout << std::endl << university_db.getDB() << std::endl;
 
-	std::string expected = "Franek;Dolas;\nHans;Kloss;\n";
-	std::cout << std::endl << expected << std::endl;
-
+	std::string expected = "Franek;Dolas;\nHans;Kloss;\nHermann;Brunner;\nFranek;Duda;\nHans;Blok;\n";
+	
 	if (expected == university_db.getDB())
-		std::cout << "OK" << std::endl;
+		std::cout << "Result: OK" << std::endl;
 	else
-		std::cout << "None OK" << std::endl;
+		std::cout << "Result: None OK" << std::endl;
+
+	std::cout << university_db.Search("Witkacy") << std::endl;
 }

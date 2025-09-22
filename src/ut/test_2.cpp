@@ -785,9 +785,25 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 	student_3->m_gender = gender::male;
 	student_3->m_pesel.set("79120405455");
 
+	employee_1->m_name = "Zenek";
+	employee_1->m_surname = "Duda";
+	employee_1->m_address = "Chsz¹szcze Rzewoszyce pow. £êko³ody 50-500 Stalowa Wola";
+	employee_1->m_salary = 1500;
+	employee_1->m_gender = gender::male;
+	employee_1->m_pesel.set("61012658203");
+
+	employee_2->m_name = "Patryk";
+	employee_2->m_surname = "Nijaki";
+	employee_2->m_address = "Stetinstrasse 77 Berlin";
+	employee_2->m_salary = 1002;
+	employee_2->m_gender = gender::male;
+	employee_2->m_pesel.set("26110479026");
+
 	university_db.addStudent(student_2);
 	university_db.addStudent(student_1);
 	university_db.addStudent(student_3);
+	university_db.addEmployee(employee_1);
+	university_db.addEmployee(employee_2);
 
 	std::string before = university_db.getBySurnames();
 
@@ -796,9 +812,12 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 	university_db.Clear();
 
 	EXPECT_TRUE(university_db.readFromFile());
-	EXPECT_TRUE(true, university_db.Search("Brunner"));
-	EXPECT_TRUE(true, university_db.Search("Kloss"));
-	EXPECT_TRUE(true, university_db.Search("Dolas"));
+	EXPECT_TRUE(university_db.Search("Brunner"));
+	EXPECT_TRUE(university_db.Search("Kloss"));
+	EXPECT_TRUE(university_db.Search("Dolas"));
+	EXPECT_TRUE(university_db.Search("Duda"));
+	EXPECT_TRUE(university_db.Search("Nijaki"));
+	EXPECT_FALSE(university_db.Search("Kierwinski"));
 
 	std::string after = university_db.getBySurnames();
 
