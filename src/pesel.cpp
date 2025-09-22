@@ -16,7 +16,7 @@ std::string pesel::getPesel() const
     return m_pesel;
 }
 
-pesel_error pesel::getLastError()
+pesel_error pesel::getLastError() const
 {
     return m_lastError;
 }

@@ -107,7 +107,7 @@ bool db::RemovePerson(unsigned int indexNr)
 	return false;
 }
 
-bool db::RemovePerson(pesel pesel)
+bool db::RemovePerson(pesel& pesel)
 {
 	Person* p_tempPersonPtr = nullptr;
 	auto result = std::find_if(begin(m_Persons), end(m_Persons), [pesel, p_tempPersonPtr](Person* person) mutable {
@@ -134,7 +134,7 @@ std::string db::getBySurnames() const
 	return output;
 }
 
-std::string db::getDB()
+std::string db::getDB() const
 {
 	std::string output;
 	

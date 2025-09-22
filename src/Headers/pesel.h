@@ -21,7 +21,7 @@ class pesel
 public:
 	pesel_error set(const std::string& pesel);
 	std::string getPesel() const;
-	pesel_error getLastError();
+	pesel_error getLastError() const;
 
 
 protected:

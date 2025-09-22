@@ -24,10 +24,10 @@ public:
 	bool ChangeSalary(const pesel& pesel, unsigned int new_salary);
 
 	bool RemovePerson(unsigned int indexNr);
-	bool RemovePerson(pesel pesel);
+	bool RemovePerson(pesel& pesel);
 	
 	std::string getBySurnames() const;
-	std::string getDB();
+	std::string getDB() const;
 	
 	void ClearDB();
 	bool saveToFile(std::string file = "db.dat");
