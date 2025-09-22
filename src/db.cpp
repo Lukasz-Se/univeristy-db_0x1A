@@ -214,27 +214,27 @@ bool db::alreadyExist(const pesel& pesel) const
 	return false;
 }
 
-void db::CreatePersonObject(Person* ppPerson, std::vector<std::string> data)
+void db::CreatePersonObject(Person* pPerson, std::vector<std::string> data)
 {
-	ppPerson->m_name = data[1];
-	ppPerson->m_surname = data[2];
-	ppPerson->m_address = data[3];
+	pPerson->m_name = data[1];
+	pPerson->m_surname = data[2];
+	pPerson->m_address = data[3];
 
 	if (data[4] == "male")
-		ppPerson->m_gender = gender::male;
+		pPerson->m_gender = gender::male;
 	else if (data[4] == "female")
-		ppPerson->m_gender = gender::female;
+		pPerson->m_gender = gender::female;
 
-	ppPerson->m_pesel.set(data[5]);
+	pPerson->m_pesel.set(data[5]);
 
 	if (data[0] == "s")
 	{
-		dynamic_cast<Student*>(ppPerson)->m_indeks_number = std::stoi(data[6]);
-		m_Persons.push_back(dynamic_cast<Student*>(ppPerson));
+		dynamic_cast<Student*>(pPerson)->m_indeks_number = std::stoi(data[6]);
+		m_Persons.push_back(dynamic_cast<Student*>(pPerson));
 	}
 	else if (data[0] == "e")
 	{
-		dynamic_cast<Employee*>(ppPerson)->m_salary = std::stoi(data[6]);
-		m_Persons.push_back(dynamic_cast<Employee*>(ppPerson));
+		dynamic_cast<Employee*>(pPerson)->m_salary = std::stoi(data[6]);
+		m_Persons.push_back(dynamic_cast<Employee*>(pPerson));
 	}
 }
