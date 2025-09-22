@@ -29,7 +29,7 @@ public:
 	std::string getBySurnames() const;
 	std::string getDB();
 	
-	void Clear();
+	void ClearDB();
 	bool saveToFile(std::string file = "db.dat");
 	bool readFromFile(std::string file = "db.dat");
 

@@ -67,7 +67,7 @@ int main()
 	university_db.saveToFile();
 	std::cout << "Lista:" << university_db.getBySurnames() << std::endl;
 
-	university_db.Clear();
+	university_db.ClearDB();
 
 	std::cout << "Lista (po wyczyszczeniu):" << university_db.getBySurnames() << std::endl;
 

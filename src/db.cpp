@@ -4,7 +4,7 @@ std::vector<Person*> db::m_Persons;
 
 db::~db()
 {
-	Clear();
+	ClearDB();
 }
 
 bool db::addStudent(Student* studentInput)
@@ -146,7 +146,7 @@ std::string db::getDB()
 	return output;
 }
 
-void db::Clear()
+void db::ClearDB()
 {
 	std::for_each(begin(m_Persons), end(m_Persons), [](Person* pPerson) {
 		delete pPerson;

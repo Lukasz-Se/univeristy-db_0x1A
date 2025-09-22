@@ -751,7 +751,7 @@ TEST_F(univeristyDBFixture, ClearDB)
 	EXPECT_TRUE(university_db.Search(pesel3));
 	EXPECT_TRUE(university_db.Search(pesel4));
 
-	university_db.Clear();
+	university_db.ClearDB();
 
 	EXPECT_FALSE(university_db.Search(pesel1));
 	EXPECT_FALSE(university_db.Search(pesel2));
@@ -809,7 +809,7 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 
 	university_db.saveToFile();
 
-	university_db.Clear();
+	university_db.ClearDB();
 
 	EXPECT_TRUE(university_db.readFromFile());
 	EXPECT_TRUE(university_db.Search("Brunner"));
