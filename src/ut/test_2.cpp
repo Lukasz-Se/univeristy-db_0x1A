@@ -904,3 +904,13 @@ TEST_F(PersonsGeneratorFixture, ValidationOfLoadSize)
 	cut.LoadFromFile(maleNames, buffer);
 	EXPECT_EQ(buffer.size(), 188);
 }
+
+TEST_F(PersonsGeneratorFixture, ValidationOfLoadContent)
+{
+	std::vector<std::string> buffer;
+	cut.LoadFromFile(maleNames, buffer);
+	EXPECT_EQ(buffer[0], "Abraham");
+	EXPECT_EQ(buffer[1], "Adam");
+	EXPECT_EQ(buffer[95], "Kajetan");
+	EXPECT_EQ(buffer[186], "Zygmunt");
+}
