@@ -898,3 +898,9 @@ TEST_F(PersonsGeneratorFixture, OpenFile)
 	EXPECT_TRUE(cut.LoadFromFile(maleNames, buffer));
 }
 
+TEST_F(PersonsGeneratorFixture, ValidationOfLoadSize)
+{
+	std::vector<std::string> buffer;
+	cut.LoadFromFile(maleNames, buffer);
+	EXPECT_EQ(buffer.size(), 188);
+}
