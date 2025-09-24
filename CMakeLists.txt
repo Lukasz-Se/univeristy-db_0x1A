@@ -14,6 +14,7 @@ src/Employee.cpp
 src/pesel.cpp
 src/db.cpp
 src/peselBirthDateParser.cpp
+src/PersonsGenerator.cpp
  "src/main.cpp")
 
 set(TestFilesToCompile
@@ -24,6 +25,7 @@ src/Employee.cpp
 src/pesel.cpp
 src/db.cpp
 src/peselBirthDateParser.cpp
+src/PersonsGenerator.cpp
 )
 
 add_executable(${PROJECT_NAME} ${ProjectFilesToCompile} )
