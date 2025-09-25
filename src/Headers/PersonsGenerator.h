@@ -13,9 +13,9 @@ class PersonsGenerator
 public:
 	PersonsGenerator(std::string maleNames = "../../../data/male_names.txt", std::string maleSurnames = "../../../data/male_surnames.txt", 
 					 std::string femaleNames = "../../../data/female_names.txt", std::string femaleSurnames = "../../../data/female_surnames.txt", 
-					 std::string streets = "../../../data/streets_names.txt", std::string towns_names = "../../../data/cities.txt");
+					 std::string streets = "../../../data/streets_names.txt", std::string towns_names = "../../../data/towns_names.txt");
 
-	std::vector<Person*> Generate(unsigned int numberOfPersons);
+	bool Generate(unsigned int numberOfPersons, std::vector<Person*>& output);
 
 	std::vector<std::string> vMaleNames;
 	std::vector<std::string> vMaleSurnames;

@@ -2,6 +2,15 @@
 
 std::vector<Person*> db::m_Persons;
 
+db::db(bool initArtificalData, unsigned short int ammount)
+{
+	if (initArtificalData)
+	{
+		PersonsGenerator pg;
+		pg.Generate(ammount, m_Persons);
+	}
+}
+
 db::~db()
 {
 	ClearDB();
@@ -141,6 +150,18 @@ std::string db::getDB() const
 	for (int i = 0; i < m_Persons.size(); i++)
 	{
 		output.append(m_Persons[i]->m_name + ';' + m_Persons[i]->m_surname + ";\n");
+	}
+
+	return output;
+}
+
+std::string db::getFullDB() const
+{
+	std::string output;
+
+	for (int i = 0; i < m_Persons.size(); i++)
+	{
+		output.append(m_Persons[i]->m_name + ';' + m_Persons[i]->m_surname + ";" + m_Persons[i]->m_pesel.getPesel() + ";" + m_Persons[i]->m_address + ";\n");
 	}
 
 	return output;

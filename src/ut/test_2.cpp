@@ -898,6 +898,16 @@ TEST_F(PersonsGeneratorFixture, OpenFile)
 	EXPECT_TRUE(cut.LoadFromFile(maleNames, buffer));
 }
 
+TEST_F(PersonsGeneratorFixture, AllFilesOpenedSuccessfully)
+{
+	EXPECT_FALSE(cut.vMaleNames.empty());
+	EXPECT_FALSE(cut.vMaleSurnames.empty());
+	EXPECT_FALSE(cut.vFemaleNames.empty());
+	EXPECT_FALSE(cut.vFemaleSurnames.empty());
+	EXPECT_FALSE(cut.vStreets.empty());
+	EXPECT_FALSE(cut.vCities.empty());
+}
+
 TEST_F(PersonsGeneratorFixture, ValidationOfLoadSize)
 {
 	std::vector<std::string> buffer;
@@ -913,4 +923,24 @@ TEST_F(PersonsGeneratorFixture, ValidationOfLoadContent)
 	EXPECT_EQ(buffer[1], "Adam");
 	EXPECT_EQ(buffer[95], "Kajetan");
 	EXPECT_EQ(buffer[186], "Zygmunt");
+}
+
+TEST_F(PersonsGeneratorFixture, DrawRandomStringItem)
+{
+	std::vector<std::string> buffer;
+	std::string t;
+
+	EXPECT_TRUE(t.empty());
+	
+	t = cut.RandomStringItem(cut.vMaleNames);
+	EXPECT_FALSE(t.empty());
+}
+
+TEST_F(PersonsGeneratorFixture, GenerateRandomData)
+{
+	std::vector<Person*> buffer;
+	EXPECT_TRUE(buffer.empty());
+
+	cut.Generate(15, buffer);
+	EXPECT_FALSE(buffer.empty());
 }

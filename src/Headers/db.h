@@ -8,11 +8,13 @@
 
 #include "Student.h"
 #include "Employee.h"
+#include "PersonsGenerator.h"
 
 class db
 {
 public:
 
+	db(bool initArtificalData = false, unsigned short int ammount = 20);
 	~db();
 	bool addStudent(Student* studentInput);
 	bool addEmployee(Employee* employeeInput);
@@ -29,7 +31,8 @@ public:
 	
 	std::string getBySurnames() const;
 	std::string getDB() const;
-	
+	std::string getFullDB() const;
+
 	void ClearDB();
 	bool saveToFile(std::string file = "db.dat");
 	bool readFromFile(std::string file = "db.dat");
