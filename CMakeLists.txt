@@ -26,11 +26,11 @@ src/db.cpp
 src/peselBirthDateParser.cpp
 )
 
-add_executable(${PROJECT_NAME} ${ProjectFilesToCompile} )
-
 # GoogleTest requires at least C++17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(${PROJECT_NAME} ${ProjectFilesToCompile} )
 
 include(FetchContent)
 FetchContent_Declare(
