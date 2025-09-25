@@ -393,10 +393,10 @@ TEST_F(univeristyDBFixture, SearchPersonByPeselWithIterator)
 
 	std::vector<Person*>::iterator it;
 
-	cut.Search(pesel1, it);
+	cut.Search(pesel1, std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Dolas");
 
-	cut.Search(pesel3, it);
+	cut.Search(pesel3, std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Duda");
 	EXPECT_NE(it.operator*()->m_surname, "Duda2");
 }
@@ -438,10 +438,10 @@ TEST_F(univeristyDBFixture, SearchPersonBySurameWithIterator)
 
 	std::vector<Person*>::iterator it;
 
-	cut.Search("Dolas", it);
+	cut.Search("Dolas", std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Dolas");
 
-	cut.Search("Duda", it);
+	cut.Search("Duda", std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Duda");
 	EXPECT_NE(it.operator*()->m_surname, "Duda2");
 
@@ -714,7 +714,7 @@ TEST_F(univeristyDBFixture, ModyfiEarnings)
 	cut.ChangeSalary(employee_1->m_pesel, 2200);
 
 	std::vector<Person*>::iterator it;
-	cut.Search("Duda", it);
+	cut.Search("Duda", std::move(it));
 	
 	auto cut = dynamic_cast<Employee*>(it.operator*());
 	EXPECT_EQ(cut->m_salary, 2200);

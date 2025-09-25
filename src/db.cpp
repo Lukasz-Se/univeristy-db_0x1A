@@ -26,7 +26,7 @@ bool db::addEmployee(Employee* employeeInput)
 	return true;
 }
 
-bool db::Search(const std::string& surname, std::vector<Person*>::iterator& returnValue)
+bool db::Search(const std::string& surname, std::vector<Person*>::iterator&& returnValue)
 {
 	auto result = std::find_if(begin(m_Persons), end(m_Persons), [surname](Person* person){
 		return person->m_surname == surname;
@@ -41,7 +41,7 @@ bool db::Search(const std::string& surname, std::vector<Person*>::iterator& retu
 	return false;
 }
 
-bool db::Search(const pesel& pesel, std::vector<Person*>::iterator& returnValue)
+bool db::Search(const pesel& pesel, std::vector<Person*>::iterator&& returnValue)
 {
 	if (pesel.getPesel() != "")
 	{
@@ -80,7 +80,7 @@ void db::SortBySalary()
 bool db::ChangeSalary(const pesel& pesel, unsigned int new_salary)
 {
 	std::vector<Person*>::iterator it;
-	if (Search(pesel, it) && dynamic_cast<Employee*>(it.operator*()))
+	if (Search(pesel, std::move(it)) && dynamic_cast<Employee*>(it.operator*()))
 	{
 		dynamic_cast<Employee*>(it.operator*())->m_salary = new_salary;
 		return true;
