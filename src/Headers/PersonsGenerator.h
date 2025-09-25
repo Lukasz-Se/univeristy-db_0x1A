@@ -2,25 +2,29 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <random>
 
+#include "PeselGenerator.h"
 #include "Student.h"
 #include "Employee.h"
 
 class PersonsGenerator
 {
 public:
-	//PersonsGenerator(std::string maleNames = "../../data/male_names.txt", std::string maleSurnames = "../../data/male_surnames.txt", 
-	//				 std::string femaleNames = "../../data/female_names.txt", std::string femaleSurnames = "../../data/female_surnames.txt", 
-	//				 std::string streets = "../../data/streets_names.txt", std::string cities = "../../data/cities.txt");
+	PersonsGenerator(std::string maleNames = "../../../data/male_names.txt", std::string maleSurnames = "../../../data/male_surnames.txt", 
+					 std::string femaleNames = "../../../data/female_names.txt", std::string femaleSurnames = "../../../data/female_surnames.txt", 
+					 std::string streets = "../../../data/streets_names.txt", std::string towns_names = "../../../data/cities.txt");
 
 	std::vector<Person*> Generate(unsigned int numberOfPersons);
 
-	std::vector<std::string> maleNames;
-	std::vector<std::string> maleSurnames;
-	std::vector<std::string> femaleNames;
-	std::vector<std::string> femaleSurnames;
-	std::vector<std::string> streets;
-	std::vector<std::string> cities;
-
+	std::vector<std::string> vMaleNames;
+	std::vector<std::string> vMaleSurnames;
+	std::vector<std::string> vFemaleNames;
+	std::vector<std::string> vFemaleSurnames;
+	std::vector<std::string> vStreets;
+	std::vector<std::string> vCities;
+	
 	bool LoadFromFile(const std::string& file, std::vector<std::string>& output);
+	std::string RandomStringItem(const std::vector<std::string>& input_list);
+	int GenerateRandomValue(const unsigned int minValue, const unsigned int maxValue);
 };

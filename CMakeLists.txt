@@ -15,6 +15,7 @@ src/pesel.cpp
 src/db.cpp
 src/peselBirthDateParser.cpp
 src/PersonsGenerator.cpp
+src/PeselGenerator.cpp
  "src/main.cpp")
 
 set(TestFilesToCompile
@@ -26,13 +27,14 @@ src/pesel.cpp
 src/db.cpp
 src/peselBirthDateParser.cpp
 src/PersonsGenerator.cpp
+src/PeselGenerator.cpp
 )
 
-add_executable(${PROJECT_NAME} ${ProjectFilesToCompile} )
-
 # GoogleTest requires at least C++17
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(${PROJECT_NAME} ${ProjectFilesToCompile} )
 
 include(FetchContent)
 FetchContent_Declare(

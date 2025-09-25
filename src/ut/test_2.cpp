@@ -35,7 +35,7 @@ protected:
 	std::string femaleNames = "../../../data/female_names.txt";
 	std::string femaleSurnames = "../../../data/female_surnames.txt";
 	std::string streets = "../../../data/streets_names.txt";
-	std::string cities = "../../../data/cities.txt";
+	std::string cities = "../../../data/towns_names.txt";
 
 	PersonsGenerator cut;
 };
