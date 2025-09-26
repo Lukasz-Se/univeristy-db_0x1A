@@ -8,15 +8,18 @@
 
 #include "Student.h"
 #include "Employee.h"
+#include "PersonsGenerator.h"
 
 class db
 {
 public:
+
+	db(bool initArtificalData = false, unsigned short int ammount = 20);
 	~db();
 	bool addStudent(Student* studentInput);
 	bool addEmployee(Employee* employeeInput);
-	bool Search(const std::string& surname, std::vector<Person*>::iterator& returnValue = m_Persons.end());
-	bool Search(const pesel& pesel, std::vector<Person*>::iterator& returnValue = m_Persons.end());
+	bool Search(const std::string& surname, std::vector<Person*>::iterator&& returnValue = m_Persons.end());
+	bool Search(const pesel& pesel, std::vector<Person*>::iterator&& returnValue = m_Persons.end());
 	void SortByPesel();
 	void SortBySurname();
 	void SortBySalary();
@@ -28,7 +31,8 @@ public:
 	
 	std::string getBySurnames() const;
 	std::string getDB() const;
-	
+	std::string getFullDB() const;
+
 	void ClearDB();
 	bool saveToFile(std::string file = "db.dat");
 	bool readFromFile(std::string file = "db.dat");

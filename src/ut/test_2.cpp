@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "../Headers/pesel.h"
 #include "../Headers/db.h"
+#include "../Headers/PersonsGenerator.h"
 
 class peselFixture : public ::testing::Test
 {
@@ -23,7 +24,20 @@ protected:
 
 	pesel pesel1, pesel2, pesel3, pesel4, fake;
 
-	db university_db;
+	db cut;
+};
+
+class PersonsGeneratorFixture : public ::testing::Test
+{
+protected:
+	std::string maleNames = "../../../data/male_names.txt";
+	std::string maleSurnames = "../../../data/male_surnames.txt";
+	std::string femaleNames = "../../../data/female_names.txt";
+	std::string femaleSurnames = "../../../data/female_surnames.txt";
+	std::string streets = "../../../data/streets_names.txt";
+	std::string cities = "../../../data/towns_names.txt";
+
+	PersonsGenerator cut;
 };
 
 TEST_F(peselFixture, PeselLength)
@@ -127,12 +141,12 @@ TEST_F(univeristyDBFixture, StudentsAdd)
 	student_4->m_gender = gender::female;
 	student_4->m_pesel.set("80012042518");
 
-	EXPECT_TRUE(university_db.addStudent(student_1));
-	EXPECT_FALSE(university_db.addStudent(student_2));
-	EXPECT_TRUE(university_db.addStudent(student_3));
-	EXPECT_FALSE(university_db.addStudent(student_1));
-	EXPECT_FALSE(university_db.addStudent(student_3));
-	EXPECT_FALSE(university_db.addStudent(student_4));
+	EXPECT_TRUE(cut.addStudent(student_1));
+	EXPECT_FALSE(cut.addStudent(student_2));
+	EXPECT_TRUE(cut.addStudent(student_3));
+	EXPECT_FALSE(cut.addStudent(student_1));
+	EXPECT_FALSE(cut.addStudent(student_3));
+	EXPECT_FALSE(cut.addStudent(student_4));
 }
 
 TEST_F(univeristyDBFixture, EmployeeAdd)
@@ -165,12 +179,12 @@ TEST_F(univeristyDBFixture, EmployeeAdd)
 	employee_4->m_gender = gender::female;
 	employee_4->m_pesel.set("80012042518");
 
-	EXPECT_TRUE(university_db.addEmployee(employee_1));
-	EXPECT_FALSE(university_db.addEmployee(employee_2));
-	EXPECT_TRUE(university_db.addEmployee(employee_3));
-	EXPECT_FALSE(university_db.addEmployee(employee_1));
-	EXPECT_FALSE(university_db.addEmployee(employee_2));
-	EXPECT_FALSE(university_db.addEmployee(employee_4));
+	EXPECT_TRUE(cut.addEmployee(employee_1));
+	EXPECT_FALSE(cut.addEmployee(employee_2));
+	EXPECT_TRUE(cut.addEmployee(employee_3));
+	EXPECT_FALSE(cut.addEmployee(employee_1));
+	EXPECT_FALSE(cut.addEmployee(employee_2));
+	EXPECT_FALSE(cut.addEmployee(employee_4));
 }
 
 TEST_F(univeristyDBFixture, MixingStudentAndEmployeeAdd)
@@ -232,19 +246,19 @@ TEST_F(univeristyDBFixture, MixingStudentAndEmployeeAdd)
 	employee_4->m_gender = gender::female;
 	employee_4->m_pesel.set("19291285511");
 
-	EXPECT_TRUE(university_db.addEmployee(employee_1));
-	EXPECT_FALSE(university_db.addEmployee(employee_2));
-	EXPECT_TRUE(university_db.addEmployee(employee_3));
-	EXPECT_FALSE(university_db.addEmployee(employee_1));
-	EXPECT_FALSE(university_db.addEmployee(employee_2));
-	EXPECT_FALSE(university_db.addEmployee(employee_4));
+	EXPECT_TRUE(cut.addEmployee(employee_1));
+	EXPECT_FALSE(cut.addEmployee(employee_2));
+	EXPECT_TRUE(cut.addEmployee(employee_3));
+	EXPECT_FALSE(cut.addEmployee(employee_1));
+	EXPECT_FALSE(cut.addEmployee(employee_2));
+	EXPECT_FALSE(cut.addEmployee(employee_4));
 
-	EXPECT_TRUE(university_db.addStudent(student_1));
-	EXPECT_FALSE(university_db.addStudent(student_2));
-	EXPECT_TRUE(university_db.addStudent(student_3));
-	EXPECT_FALSE(university_db.addStudent(student_1));
-	EXPECT_FALSE(university_db.addStudent(student_3));
-	EXPECT_FALSE(university_db.addStudent(student_4));
+	EXPECT_TRUE(cut.addStudent(student_1));
+	EXPECT_FALSE(cut.addStudent(student_2));
+	EXPECT_TRUE(cut.addStudent(student_3));
+	EXPECT_FALSE(cut.addStudent(student_1));
+	EXPECT_FALSE(cut.addStudent(student_3));
+	EXPECT_FALSE(cut.addStudent(student_4));
 }
 
 TEST_F(univeristyDBFixture, SearchPersonByPesel)
@@ -277,10 +291,10 @@ TEST_F(univeristyDBFixture, SearchPersonByPesel)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_1);
-	university_db.addEmployee(employee_1);
-	university_db.addStudent(student_2);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_1);
+	cut.addEmployee(employee_1);
+	cut.addStudent(student_2);
+	cut.addEmployee(employee_2);
 
 	pesel1.set(student_1->m_pesel.getPesel());
 	pesel2.set(student_2->m_pesel.getPesel());
@@ -288,11 +302,11 @@ TEST_F(univeristyDBFixture, SearchPersonByPesel)
 	pesel4.set(employee_2->m_pesel.getPesel());
 	fake.set("791204054565");
 
-	EXPECT_EQ(true, university_db.Search(pesel1));
-	EXPECT_EQ(true, university_db.Search(pesel2));
-	EXPECT_NE(true, university_db.Search(fake));
-	EXPECT_EQ(true, university_db.Search(pesel3));
-	EXPECT_EQ(true, university_db.Search(pesel4));
+	EXPECT_EQ(true, cut.Search(pesel1));
+	EXPECT_EQ(true, cut.Search(pesel2));
+	EXPECT_NE(true, cut.Search(fake));
+	EXPECT_EQ(true, cut.Search(pesel3));
+	EXPECT_EQ(true, cut.Search(pesel4));
 }
 
 TEST_F(univeristyDBFixture, SearchPersonBySurname)
@@ -325,16 +339,16 @@ TEST_F(univeristyDBFixture, SearchPersonBySurname)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_1);
-	university_db.addEmployee(employee_1);
-	university_db.addStudent(student_2);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_1);
+	cut.addEmployee(employee_1);
+	cut.addStudent(student_2);
+	cut.addEmployee(employee_2);
 
-	EXPECT_EQ(true, university_db.Search("Dolas"));
-	EXPECT_EQ(true, university_db.Search("Nijaki"));
-	EXPECT_NE(true, university_db.Search("Dolar"));
-	EXPECT_EQ(true, university_db.Search("Kloss"));
-	EXPECT_EQ(true, university_db.Search("Duda"));
+	EXPECT_EQ(true, cut.Search("Dolas"));
+	EXPECT_EQ(true, cut.Search("Nijaki"));
+	EXPECT_NE(true, cut.Search("Dolar"));
+	EXPECT_EQ(true, cut.Search("Kloss"));
+	EXPECT_EQ(true, cut.Search("Duda"));
 }
 
 TEST_F(univeristyDBFixture, SearchPersonByPeselWithIterator)
@@ -367,10 +381,10 @@ TEST_F(univeristyDBFixture, SearchPersonByPeselWithIterator)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_1);
-	university_db.addEmployee(employee_1);
-	university_db.addStudent(student_2);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_1);
+	cut.addEmployee(employee_1);
+	cut.addStudent(student_2);
+	cut.addEmployee(employee_2);
 
 	pesel1.set(student_1->m_pesel.getPesel());
 	pesel2.set(student_2->m_pesel.getPesel());
@@ -379,10 +393,10 @@ TEST_F(univeristyDBFixture, SearchPersonByPeselWithIterator)
 
 	std::vector<Person*>::iterator it;
 
-	university_db.Search(pesel1, it);
+	cut.Search(pesel1, std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Dolas");
 
-	university_db.Search(pesel3, it);
+	cut.Search(pesel3, std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Duda");
 	EXPECT_NE(it.operator*()->m_surname, "Duda2");
 }
@@ -417,17 +431,17 @@ TEST_F(univeristyDBFixture, SearchPersonBySurameWithIterator)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_1);
-	university_db.addEmployee(employee_1);
-	university_db.addStudent(student_2);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_1);
+	cut.addEmployee(employee_1);
+	cut.addStudent(student_2);
+	cut.addEmployee(employee_2);
 
 	std::vector<Person*>::iterator it;
 
-	university_db.Search("Dolas", it);
+	cut.Search("Dolas", std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Dolas");
 
-	university_db.Search("Duda", it);
+	cut.Search("Duda", std::move(it));
 	EXPECT_EQ(it.operator*()->m_surname, "Duda");
 	EXPECT_NE(it.operator*()->m_surname, "Duda2");
 
@@ -449,12 +463,12 @@ TEST_F(univeristyDBFixture, RemoveStudendByIndexNumber)
 	student_2->m_gender = gender::male;
 	student_2->m_pesel.set("23101212345");
 
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_2);
+	cut.addStudent(student_1);
+	cut.addStudent(student_2);
 
-	EXPECT_FALSE(university_db.RemovePerson(1005));
-	EXPECT_TRUE(university_db.RemovePerson(student_1->m_indeks_number));
-	EXPECT_FALSE(university_db.Search("Dolas"));
+	EXPECT_FALSE(cut.RemovePerson(1005));
+	EXPECT_TRUE(cut.RemovePerson(student_1->m_indeks_number));
+	EXPECT_FALSE(cut.Search("Dolas"));
 }
 
 TEST_F(univeristyDBFixture, DeletePersonByPesel)
@@ -487,15 +501,15 @@ TEST_F(univeristyDBFixture, DeletePersonByPesel)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_1);
-	university_db.addEmployee(employee_1);
-	university_db.addStudent(student_2);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_1);
+	cut.addEmployee(employee_1);
+	cut.addStudent(student_2);
+	cut.addEmployee(employee_2);
 
-	university_db.RemovePerson(student_1->m_pesel);
-	university_db.RemovePerson(employee_2->m_pesel);
-	EXPECT_FALSE(university_db.Search("Dolas"));
-	EXPECT_FALSE(university_db.Search("Nijaki"));
+	cut.RemovePerson(student_1->m_pesel);
+	cut.RemovePerson(employee_2->m_pesel);
+	EXPECT_FALSE(cut.Search("Dolas"));
+	EXPECT_FALSE(cut.Search("Nijaki"));
 }
 
 TEST_F(univeristyDBFixture, PrintDB)
@@ -514,12 +528,12 @@ TEST_F(univeristyDBFixture, PrintDB)
 	student_2->m_gender = gender::male;
 	student_2->m_pesel.set("23101212345");
 
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_2);
+	cut.addStudent(student_1);
+	cut.addStudent(student_2);
 
 	std::string expected = "Franek;Dolas;\nHans;Kloss;\n";
 
-	EXPECT_EQ(university_db.getDB(), expected);
+	EXPECT_EQ(cut.getDB(), expected);
 }
 
 TEST_F(univeristyDBFixture, SortByPesel)
@@ -559,14 +573,14 @@ TEST_F(univeristyDBFixture, SortByPesel)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_3);
-	university_db.addEmployee(employee_1);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_1);
+	cut.addStudent(student_2);
+	cut.addStudent(student_3);
+	cut.addEmployee(employee_1);
+	cut.addEmployee(employee_2);
 
-	university_db.SortByPesel();
-	EXPECT_EQ("Kloss;Nijaki;Dolas;Duda;Brunner;", university_db.getBySurnames());
+	cut.SortByPesel();
+	EXPECT_EQ("Kloss;Nijaki;Dolas;Duda;Brunner;", cut.getBySurnames());
 }
 
 TEST_F(univeristyDBFixture, SortBySurname)
@@ -613,16 +627,16 @@ TEST_F(univeristyDBFixture, SortBySurname)
 	employee_3->m_gender = gender::male;
 	employee_3->m_pesel.set("96052512556");
 
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
-	university_db.addEmployee(employee_1);
-	university_db.addEmployee(employee_2);
-	university_db.addEmployee(employee_3);
+	cut.addStudent(student_2);
+	cut.addStudent(student_1);
+	cut.addStudent(student_3);
+	cut.addEmployee(employee_1);
+	cut.addEmployee(employee_2);
+	cut.addEmployee(employee_3);
 
-	university_db.SortBySurname();
+	cut.SortBySurname();
 	
-	EXPECT_EQ("Brunner;Dolas;Duda;Kloss;Kloss;Nijaki;", university_db.getBySurnames());
+	EXPECT_EQ("Brunner;Dolas;Duda;Kloss;Kloss;Nijaki;", cut.getBySurnames());
 }
 
 TEST_F(univeristyDBFixture, SortBySalary)
@@ -669,22 +683,17 @@ TEST_F(univeristyDBFixture, SortBySalary)
 	employee_3->m_gender = gender::male;
 	employee_3->m_pesel.set("96052512556");
 
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
-	university_db.addEmployee(employee_1);
-	university_db.addEmployee(employee_2);
-	university_db.addEmployee(employee_3);
+	cut.addStudent(student_2);
+	cut.addStudent(student_1);
+	cut.addStudent(student_3);
+	cut.addEmployee(employee_1);
+	cut.addEmployee(employee_2);
+	cut.addEmployee(employee_3);
 
-	university_db.SortBySalary();
+	cut.SortBySalary();
 	
-	EXPECT_EQ("Kloss;Dolas;Brunner;Nijaki;Duda;Kloss;", university_db.getBySurnames());
+	EXPECT_EQ("Kloss;Dolas;Brunner;Nijaki;Duda;Kloss;", cut.getBySurnames());
 }
-
-//TEST_F(univeristyDBFixture, FillDBWithArtificalData)
-//{
-//	EXPECT_STRNE("", university_db.getBySurnames().c_str());
-//}
 
 TEST_F(univeristyDBFixture, ModyfiEarnings)
 {
@@ -695,12 +704,12 @@ TEST_F(univeristyDBFixture, ModyfiEarnings)
 	employee_1->m_gender = gender::male;
 	employee_1->m_pesel.set("61012658203");
 
-	university_db.addEmployee(employee_1);
+	cut.addEmployee(employee_1);
 
-	university_db.ChangeSalary(employee_1->m_pesel, 2200);
+	cut.ChangeSalary(employee_1->m_pesel, 2200);
 
 	std::vector<Person*>::iterator it;
-	university_db.Search("Duda", it);
+	cut.Search("Duda", std::move(it));
 	
 	auto cut = dynamic_cast<Employee*>(it.operator*());
 	EXPECT_EQ(cut->m_salary, 2200);
@@ -736,30 +745,30 @@ TEST_F(univeristyDBFixture, ClearDB)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addEmployee(employee_1);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_2);
+	cut.addStudent(student_1);
+	cut.addEmployee(employee_1);
+	cut.addEmployee(employee_2);
 
 	pesel1 = student_1->m_pesel;
 	pesel2 = student_2->m_pesel;
 	pesel3 = employee_1->m_pesel;
 	pesel4 = employee_2->m_pesel;
 
-	EXPECT_TRUE(university_db.Search(pesel1));
-	EXPECT_TRUE(university_db.Search(pesel2));
-	EXPECT_TRUE(university_db.Search(pesel3));
-	EXPECT_TRUE(university_db.Search(pesel4));
+	EXPECT_TRUE(cut.Search(pesel1));
+	EXPECT_TRUE(cut.Search(pesel2));
+	EXPECT_TRUE(cut.Search(pesel3));
+	EXPECT_TRUE(cut.Search(pesel4));
 
-	university_db.ClearDB();
+	cut.ClearDB();
 
-	EXPECT_FALSE(university_db.Search(pesel1));
-	EXPECT_FALSE(university_db.Search(pesel2));
-	EXPECT_FALSE(university_db.Search(pesel3));
-	EXPECT_FALSE(university_db.Search(pesel4));
+	EXPECT_FALSE(cut.Search(pesel1));
+	EXPECT_FALSE(cut.Search(pesel2));
+	EXPECT_FALSE(cut.Search(pesel3));
+	EXPECT_FALSE(cut.Search(pesel4));
 
 	fake.set("791204054565");
-	EXPECT_FALSE(university_db.Search(fake));
+	EXPECT_FALSE(cut.Search(fake));
 }
 
 TEST_F(univeristyDBFixture, LoadFromFile)
@@ -799,27 +808,27 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 	employee_2->m_gender = gender::male;
 	employee_2->m_pesel.set("26110479026");
 
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
-	university_db.addEmployee(employee_1);
-	university_db.addEmployee(employee_2);
+	cut.addStudent(student_2);
+	cut.addStudent(student_1);
+	cut.addStudent(student_3);
+	cut.addEmployee(employee_1);
+	cut.addEmployee(employee_2);
 
-	std::string before = university_db.getBySurnames();
+	std::string before = cut.getBySurnames();
 
-	university_db.saveToFile();
+	cut.saveToFile();
 
-	university_db.ClearDB();
+	cut.ClearDB();
 
-	EXPECT_TRUE(university_db.readFromFile());
-	EXPECT_TRUE(university_db.Search("Brunner"));
-	EXPECT_TRUE(university_db.Search("Kloss"));
-	EXPECT_TRUE(university_db.Search("Dolas"));
-	EXPECT_TRUE(university_db.Search("Duda"));
-	EXPECT_TRUE(university_db.Search("Nijaki"));
-	EXPECT_FALSE(university_db.Search("Kierwinski"));
+	EXPECT_TRUE(cut.readFromFile());
+	EXPECT_TRUE(cut.Search("Brunner"));
+	EXPECT_TRUE(cut.Search("Kloss"));
+	EXPECT_TRUE(cut.Search("Dolas"));
+	EXPECT_TRUE(cut.Search("Duda"));
+	EXPECT_TRUE(cut.Search("Nijaki"));
+	EXPECT_FALSE(cut.Search("Kierwinski"));
 
-	std::string after = university_db.getBySurnames();
+	std::string after = cut.getBySurnames();
 
 	EXPECT_EQ(before, after);
 }
@@ -868,12 +877,65 @@ TEST_F(univeristyDBFixture, SaveTOFile)
 	employee_4->m_gender = gender::female;
 	employee_4->m_pesel.set("19291285511");
 
-	university_db.addStudent(student_2);
-	university_db.addStudent(student_1);
-	university_db.addStudent(student_3);
-	university_db.addEmployee(employee_1);
-	university_db.addEmployee(employee_3);
-	university_db.addEmployee(employee_4);
+	cut.addStudent(student_2);
+	cut.addStudent(student_1);
+	cut.addStudent(student_3);
+	cut.addEmployee(employee_1);
+	cut.addEmployee(employee_3);
+	cut.addEmployee(employee_4);
 
-	EXPECT_TRUE(university_db.saveToFile());
+	EXPECT_TRUE(cut.saveToFile());
+}
+
+TEST_F(PersonsGeneratorFixture, OpenFile)
+{
+	std::vector<std::string> buffer;
+	EXPECT_TRUE(cut.LoadFromFile(maleNames, buffer));
+}
+
+TEST_F(PersonsGeneratorFixture, AllFilesOpenedSuccessfully)
+{
+	EXPECT_FALSE(cut.vMaleNames.empty());
+	EXPECT_FALSE(cut.vMaleSurnames.empty());
+	EXPECT_FALSE(cut.vFemaleNames.empty());
+	EXPECT_FALSE(cut.vFemaleSurnames.empty());
+	EXPECT_FALSE(cut.vStreets.empty());
+	EXPECT_FALSE(cut.vCities.empty());
+}
+
+TEST_F(PersonsGeneratorFixture, ValidationOfLoadSize)
+{
+	std::vector<std::string> buffer;
+	cut.LoadFromFile(maleNames, buffer);
+	EXPECT_EQ(buffer.size(), 188);
+}
+
+TEST_F(PersonsGeneratorFixture, ValidationOfLoadContent)
+{
+	std::vector<std::string> buffer;
+	cut.LoadFromFile(maleNames, buffer);
+	EXPECT_EQ(buffer[0], "Abraham");
+	EXPECT_EQ(buffer[1], "Adam");
+	EXPECT_EQ(buffer[95], "Kajetan");
+	EXPECT_EQ(buffer[186], "Zygmunt");
+}
+
+TEST_F(PersonsGeneratorFixture, DrawRandomStringItem)
+{
+	std::vector<std::string> buffer;
+	std::string t;
+
+	EXPECT_TRUE(t.empty());
+	
+	t = cut.RandomStringItem(cut.vMaleNames);
+	EXPECT_FALSE(t.empty());
+}
+
+TEST_F(PersonsGeneratorFixture, GenerateRandomData)
+{
+	std::vector<Person*> buffer;
+	EXPECT_TRUE(buffer.empty());
+
+	cut.Generate(15, buffer);
+	EXPECT_FALSE(buffer.empty());
 }
