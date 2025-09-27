@@ -214,8 +214,11 @@ bool db::readFromFile(std::string file)
 			
 			else if (data[0] == "e")
 				pTemp = new Employee(data);
+			
+			if (pTemp)
+				m_Persons.push_back(pTemp);
 
-			m_Persons.push_back(pTemp);
+			pTemp = nullptr;
 			data.clear();
 		}		
 		return true;
