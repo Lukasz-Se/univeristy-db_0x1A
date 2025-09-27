@@ -199,7 +199,8 @@ bool db::readFromFile(std::string file)
 	{
 		std::string buffor, line;
 		std::vector <std::string> properties;
-	
+		Person* pTemp = nullptr;
+
 		while (std::getline(fd, buffor, '\n'))
 		{		
 			std::stringstream ss(buffor);
@@ -209,19 +210,14 @@ bool db::readFromFile(std::string file)
 			}
 
 			if (properties[0] == "s")
-			{
-				Student* temp = new Student;
-				CreatePersonObject(temp, properties);
-			}
-			if (properties[0] == "e")
-			{
-				Employee* temp = new Employee;
-				CreatePersonObject(temp, properties);
-			}
+				pTemp = new Student(properties);
+			
+			else if (properties[0] == "e")
+				pTemp = new Employee(properties);
 
+			m_Persons.push_back(pTemp);
 			properties.clear();
-		}
-		
+		}		
 		return true;
 	}
 	return false;

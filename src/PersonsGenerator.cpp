@@ -1,7 +1,5 @@
 #include "Headers/PersonsGenerator.h"
 
-
-
 PersonsGenerator::PersonsGenerator(std::string maleNames, std::string maleSurnames, std::string femaleNames, std::string femaleSurnames, std::string streets, std::string towns_names)
 {
 	LoadFromFile(maleNames, vMaleNames);

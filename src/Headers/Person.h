@@ -10,6 +10,7 @@ enum class gender
 class Person
 {
 public:
+    Person() = default;
     Person(const std::vector<std::string>& inputData);
     virtual std::string getData() = 0;
 
