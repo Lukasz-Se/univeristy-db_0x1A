@@ -70,11 +70,11 @@ bool PersonsGenerator::LoadFromFile(const std::string& file, std::vector<std::st
 
 std::string PersonsGenerator::RandomStringItem(const std::vector<std::string>& input_list)
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<> dis(0, input_list.size() -1);
+	//std::random_device rd;
+	//std::mt19937 gen(rd());
+	//std::uniform_real_distribution<> dis(0, input_list.size() -1);
 
-	return input_list.at(dis(gen));
+	return input_list.at(GenerateRandomValue(0, input_list.size() - 1));
 }
 
 int PersonsGenerator::GenerateRandomValue(const unsigned int minValue, const unsigned int maxValue)
