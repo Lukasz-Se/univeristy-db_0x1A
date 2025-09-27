@@ -41,5 +41,4 @@ private:
 	static std::vector<Person*> m_Persons;
 
 	bool alreadyExist(const pesel& pesel) const;
-	void CreatePersonObject(Person* pPerson, std::vector<std::string> data);
 };
