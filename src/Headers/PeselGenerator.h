@@ -11,7 +11,6 @@ public:
 		unsigned short int end_day = 31, unsigned short int end_month = 12, unsigned short int end_year = 2024, int sex = 99);
 
 private:
-
 	int GenerateRandomValue(int maxValue);
 	std::string ParseBDate(std::chrono::year_month_day bDate);
 	std::string ComplementDigitsTo(int serial, int complementTo = 3, char complementWith = '0');

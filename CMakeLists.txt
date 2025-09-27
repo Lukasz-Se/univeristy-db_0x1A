@@ -20,7 +20,7 @@ src/PeselGenerator.cpp
  "src/main.cpp")
 
 set(TestFilesToCompile
-src/ut/test_2.cpp
+src/ut/ut.cpp
 
 src/Person.cpp
 src/Student.cpp

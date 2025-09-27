@@ -1,6 +1,7 @@
 #include "Headers/PersonsGenerator.h"
 
-PersonsGenerator::PersonsGenerator(std::string maleNames, std::string maleSurnames, std::string femaleNames, std::string femaleSurnames, std::string streets, std::string towns_names)
+PersonsGenerator::PersonsGenerator(const std::string& maleNames, const std::string& maleSurnames, const std::string& femaleNames, 
+	const std::string& femaleSurnames, const std::string& streets, const std::string& towns_names)
 {
 	LoadFromFile(maleNames, vMaleNames);
 	LoadFromFile(maleSurnames, vMaleSurnames);
@@ -70,10 +71,6 @@ bool PersonsGenerator::LoadFromFile(const std::string& file, std::vector<std::st
 
 std::string PersonsGenerator::RandomStringItem(const std::vector<std::string>& input_list)
 {
-	//std::random_device rd;
-	//std::mt19937 gen(rd());
-	//std::uniform_real_distribution<> dis(0, input_list.size() -1);
-
 	return input_list.at(GenerateRandomValue(0, input_list.size() - 1));
 }
 

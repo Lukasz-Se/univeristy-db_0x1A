@@ -13,7 +13,6 @@
 class db
 {
 public:
-
 	db(bool initArtificalData = false, unsigned short int ammount = 20);
 	~db();
 	bool addStudent(Student* studentInput);
@@ -34,8 +33,8 @@ public:
 	std::string getFullDB() const;
 
 	void ClearDB();
-	bool SaveToFile(std::string file = "db.dat");
-	bool ReadFromFile(std::string file = "db.dat");
+	bool SaveToFile(const std::string& file = "db.dat");
+	bool ReadFromFile(const std::string& file = "db.dat");
 
 private:
 	static std::vector<Person*> m_Persons;

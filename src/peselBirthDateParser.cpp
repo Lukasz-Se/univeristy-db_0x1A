@@ -2,7 +2,6 @@
 
 peselBirthDateParser::peselBirthDateParser()
 {
-    // miesiace 01-12, 21-32, 41-52, 61-72, 81-92
     int m_counter = 0;
     for (int i = 1; i <= 92; i++)
     {
