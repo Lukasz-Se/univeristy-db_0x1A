@@ -9,6 +9,7 @@ project ("University_database")
 
 set(ProjectFilesToCompile
 
+src/Person.cpp
 src/Student.cpp
 src/Employee.cpp
 src/pesel.cpp
@@ -21,6 +22,7 @@ src/PeselGenerator.cpp
 set(TestFilesToCompile
 src/ut/test_2.cpp
 
+src/Person.cpp
 src/Student.cpp
 src/Employee.cpp
 src/pesel.cpp
