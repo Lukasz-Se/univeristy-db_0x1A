@@ -34,8 +34,8 @@ public:
 	std::string getFullDB() const;
 
 	void ClearDB();
-	bool saveToFile(std::string file = "db.dat");
-	bool readFromFile(std::string file = "db.dat");
+	bool SaveToFile(std::string file = "db.dat");
+	bool ReadFromFile(std::string file = "db.dat");
 
 private:
 	static std::vector<Person*> m_Persons;

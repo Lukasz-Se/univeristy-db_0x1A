@@ -176,7 +176,7 @@ void db::ClearDB()
 	m_Persons.clear();
 }
 
-bool db::saveToFile(std::string file)
+bool db::SaveToFile(std::string file)
 {
 	std::ofstream fd(file, std::ios::out | std::ios::trunc);
 	if (fd)
@@ -191,7 +191,7 @@ bool db::saveToFile(std::string file)
 	return false;
 }
 
-bool db::readFromFile(std::string file)
+bool db::ReadFromFile(std::string file)
 {
 	std::ifstream fd(file, std::ios::in);
 	

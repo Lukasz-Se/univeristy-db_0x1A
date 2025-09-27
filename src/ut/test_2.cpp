@@ -816,11 +816,11 @@ TEST_F(univeristyDBFixture, LoadFromFile)
 
 	std::string before = cut.getBySurnames();
 
-	cut.saveToFile();
+	cut.SaveToFile();
 
 	cut.ClearDB();
 
-	EXPECT_TRUE(cut.readFromFile());
+	EXPECT_TRUE(cut.ReadFromFile());
 	EXPECT_TRUE(cut.Search("Brunner"));
 	EXPECT_TRUE(cut.Search("Kloss"));
 	EXPECT_TRUE(cut.Search("Dolas"));
@@ -884,7 +884,7 @@ TEST_F(univeristyDBFixture, SaveTOFile)
 	cut.addEmployee(employee_3);
 	cut.addEmployee(employee_4);
 
-	EXPECT_TRUE(cut.saveToFile());
+	EXPECT_TRUE(cut.SaveToFile());
 }
 
 TEST_F(PersonsGeneratorFixture, OpenFile)
