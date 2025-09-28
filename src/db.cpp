@@ -228,8 +228,7 @@ bool db::ReadFromFile(const std::string& file)
 
 bool db::alreadyExist(const pesel& pesel) const
 {
-	if (pesel.getPesel() != "")
-		if (std::any_of(begin(m_Persons), end(m_Persons), [pesel](Person* pPerson) {return pPerson->m_pesel.getPesel() == pesel.getPesel(); }))
-			return true;
+	if (std::any_of(begin(m_Persons), end(m_Persons), [pesel](Person* pPerson) {return pPerson->m_pesel.getPesel() == pesel.getPesel(); }))
+		return true;
 	return false;
 }
