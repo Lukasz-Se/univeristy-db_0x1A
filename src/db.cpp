@@ -18,7 +18,6 @@ db::~db()
 
 bool db::addStudent(Student* studentInput)
 {
-
 	if (alreadyExist(studentInput->m_pesel) || studentInput->m_pesel.getPesel() == "")
 		return false;
 
